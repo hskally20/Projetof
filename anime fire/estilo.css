@@ -1,0 +1,444 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+  }
+  
+  header {
+    background-color: #1c1c1c;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .user-menu {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-icon {
+    font-size: 30px;
+    margin-right: 20px;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-bar input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 250px;
+  }
+  
+  .search-bar button {
+    padding: 10px;
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    margin-left: 10px;
+  }
+  
+  .menu-toggle {
+    padding: 10px;
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    margin-left: 20px;
+    cursor: pointer;
+  }
+  
+  /* Menu de navegação */
+  .navbar-container {
+    background-color: #ff0000;
+    padding: 10px 0;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .navbar-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .navbar-link:hover {
+    color: #d9534f; /* Cor vermelha no hover */
+  }
+  
+  .navbar-link:focus {
+    color: #d9534f;
+    outline: none;}
+/* Estilos gerais para o carrossel */
+/* Responsividade para o carrossel */
+@media (max-width: 768px) {
+.carousel-item img {
+    max-height: 400px; /* Ajusta o tamanho das imagens */
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 10%; /* Aumenta o tamanho dos botões */
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    width: 30px;
+    height: 30px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+}
+
+/* Para telas menores que 576px */
+@media (max-width: 576px) {
+.carousel-item img {
+    max-height: 300px; /* Ajusta o tamanho da imagem */
+}
+}
+  
+      
+.anime-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.anime-card:hover {
+background-color: #2a2a2a;
+box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
+cursor: pointer;
+}
+
+.anime-card h3 {
+color: #c32a2a;
+}
+
+.anime-card p {
+color: #c0c0c0;
+}
+
+
+footer {
+background-color: #1c1c1c;
+color: white;
+text-align: center;
+padding: 20px 0;
+margin-top: 40px;
+}
+/* Estilos para o menu de navegação */
+.navbar-container {
+  background-color: #000;
+  padding: 10px 0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navbar-link {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.navbar-link:hover {
+  color: #d9534f; /* Cor vermelha no hover */
+}
+
+
+  
+  /* Estilo do botão e busca */
+  .search-bar {
+    display: flex;
+  }
+  
+  .search-bar input {
+    padding: 5px;
+    margin-right: 5px;
+  }
+  
+  .search-bar button {
+    padding: 5px;
+  }
+  
+  /* Estilos para a parte do carousel e cards */
+  .carousel-container {
+    margin: 20px 0;
+  }
+  
+  .cards-section {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .anime-card {
+    width: 200px;
+    margin: 10px;
+  }
+  
+  .anime-card img {
+    width: 100%;
+  }
+  
+  .card-content {
+    text-align: center;
+  }
+  /* estilo.css */
+
+/* Definindo as cores principais */
+body {
+    background-color: #121212; /* Fundo escuro */
+    color: white; /* Texto em branco */
+}
+
+/* Barra de Navegação */
+
+.navbar-container {
+    background-color: #c32a2a; /* Cor de fundo vermelha */
+    padding: 15px 0;
+}
+
+.navbar {
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+
+.navbar-link {
+color: white;
+text-decoration: none;
+font-size: 18px; /* Um pouco maior para melhor legibilidade */
+font-weight: 600; /* Destaque para os links */
+}
+
+.navbar-link:hover {
+color: #f0f0f0;
+}
+
+.navbar a:hover {
+    color: #f0f0f0;
+}
+
+/* Cards de Anime */
+.anime-card {
+    background-color: #1a1a1a; /* Card escuro */
+    border: 1px solid #333;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.anime-card:hover {
+    background-color: #2a2a2a; /* Hover escuro */
+}
+
+.anime-card h3 {
+    color: #c32a2a; /* Título vermelho */
+    font-size: 1.2rem;
+}
+
+.anime-card p {
+    color: #c0c0c0; /* Texto secundário em cinza claro */
+}
+
+/* Filtro de pesquisa */
+input#search {
+    background-color: #1a1a1a;
+    color: white;
+    border: 1px solid #333;
+}
+
+input#search:focus {
+    border-color: #c32a2a;
+}
+
+/* Estilo da página */
+.container {
+    padding-top: 30px;
+}
+
+h2 {
+    color: #c32a2a;
+}
+
+/* Adicionando um efeito de hover nos cards de anime */
+.anime-card:hover {
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+/* Responsividade: Para dispositivos móveis */
+@media (max-width: 768px) {
+    .anime-card {
+        margin-bottom: 10px;
+    }
+
+    .anime-card h3 {
+        font-size: 1rem;
+    }
+}
+/* Continuação do estilo.css */
+
+/* Seção de episódios */
+.list-group-item {
+    background-color: #1a1a1a; /* Fundo escuro dos episódios */
+    border: 1px solid #333; /* Borda cinza escura */
+    color: #c0c0c0; /* Texto em cinza claro */
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.list-group-item:hover {
+    background-color: #333; /* Hover mais escuro */
+    color: white;
+}
+
+/* Filtro de Temporada */
+.form-select {
+    background-color: #1a1a1a;
+    border-color: #333;
+    color: white;
+}
+
+.form-select:focus {
+    border-color: #c32a2a; /* Vermelho no foco */
+}
+
+/* Animes Similares */
+.anime-card {
+    background-color: #1a1a1a;
+    border: 1px solid #333;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.anime-card:hover {
+    background-color: #2a2a2a;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.anime-card h3 {
+    color: #c32a2a;
+}
+
+.anime-card p {
+    color: #c0c0c0;
+}
+.img-custom {
+    max-width: 100%; /* Garante que a imagem não ultrapasse o tamanho do contêiner */
+    height: auto;    /* Mantém a proporção original */
+    display: block;  /* Garante que a imagem seja exibida como um bloco, sem espaçamento embaixo */
+}
+/* Estilo inicial para a tabela de gêneros, inicialmente escondida */
+.genre-table {
+    display: none; /* Inicialmente a tabela está oculta */
+    margin-top: 20px;
+}
+
+.genre-table.show {
+    display: block; /* A tabela se torna visível quando a classe 'show' é adicionada */
+}
+
+/* Estilos adicionais para tabela e nav */
+.table th, .table td {
+    text-align: center;
+}
+
+
+.nav-link {
+    color: #fff !important;
+}
+/* Estilo do overlay */
+.overlay {
+display: none; /* Começa escondido */
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7);
+z-index: 1000;
+align-items: center;
+justify-content: center;
+}
+
+.genre-list {
+background-color: rgb(0, 0, 0);
+padding: 20px;
+border-radius: 10px;
+max-width: 300px;
+text-align: center;
+}
+
+.genre-list ul {
+list-style-type: none;
+padding: 0;
+}
+
+.genre-list ul li {
+margin: 10px 0;
+cursor: pointer;
+transition: color 0.3s ease;
+}
+
+.genre-list ul li:hover {
+color: red;
+font-weight: bold;
+}
+
+.close-btn {
+cursor: pointer;
+margin-top: 15px;
+padding: 5px 10px;
+background-color: red;
+color: #fff;
+border: none;
+border-radius: 5px;
+}
+  
+  
+  /* Botão de fechar */
+.close-btn {
+cursor: pointer;
+margin-top: 15px;
+padding: 5px 10px;
+background-color: red;
+color: rgb(0, 0, 0);
+border: none;
+border-radius: 5px;
+}
+  
