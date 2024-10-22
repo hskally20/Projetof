@@ -1,0 +1,65 @@
+{
+  "rezero": {
+    "title": "Re:Zero - Starting Life in Another World",
+    "episodes": [
+      {
+        "number": 1,
+        "description": "Episódio 1 de Re:Zero - Subaru é transportado para um mundo alternativo.",
+        "videoUrl": "https://www.youtube.com/embed/video-de-exemplo-rezero-1"
+      },
+      {
+        "number": 2,
+        "description": "Episódio 2 de Re:Zero - Subaru continua sua jornada.",
+        "videoUrl": "https://www.youtube.com/embed/video-de-exemplo-rezero-2"
+      }
+    ]
+  },
+  "seirei-gensouki": {
+    "title": "Seirei Gensouki 2",
+    "episodes": [
+      {
+        "number": 1,
+        "title": "O Início do Poder",
+        "description": "A história de Ryoma começa em seu novo mundo, enquanto ele explora suas habilidades mágicas e encontra novos amigos.",
+        "releaseDate": "01/10/2024",
+        "videoUrl": "https://www.youtube.com/embed/video-seirei-1"
+      },
+      {
+        "number": 2,
+        "title": "A Luta Pela Sobrevivência",
+        "description": "Ryoma e seus amigos enfrentam um inimigo misterioso que ameaça a paz em sua nova casa.",
+        "releaseDate": "08/10/2024",
+        "videoUrl": "https://www.youtube.com/embed/video-seirei-2"
+      },
+      {
+        "number": 3,
+        "title": "O Poder Se Revela",
+        "description": "Com uma batalha intensa, Ryoma descobre a verdadeira extensão de seus poderes e seus novos aliados.",
+        "releaseDate": "15/10/2024",
+        "videoUrl": "https://www.youtube.com/embed/video-seirei-3"
+      },
+      {
+        "number": 4,
+        "title": "A Decisão Final",
+        "description": "Enquanto uma ameaça maior surge, Ryoma precisa fazer escolhas difíceis para proteger aqueles que ama.",
+        "releaseDate": "22/10/2024",
+        "videoUrl": "https://www.youtube.com/embed/video-seirei-4"
+      }
+    ]
+  },
+  "dragon-ball-daima": {
+    "title": "Dragon Ball Daima",
+    "episodes": [
+      {
+        "number": 1,
+        "description": "Episódio 1 de Dragon Ball Daima - Goku retorna.",
+        "videoUrl": "https://www.youtube.com/embed/video-de-exemplo-dragonball-1"
+      },
+      {
+        "number": 2,
+        "description": "Episódio 2 de Dragon Ball Daima - Batalha épica.",
+        "videoUrl": "https://www.youtube.com/embed/video-de-exemplo-dragonball-2"
+      }
+    ]
+  }
+}

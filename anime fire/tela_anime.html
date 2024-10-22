@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reprodução de Anime - Anime Fire</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+  <!-- Cabeçalho -->
+  <nav class="navbar-container">
+    <div class="navbar">
+      <a href="animefire.html" class="navbar-link">Início</a>
+      <a class="nav-link" href="#" id="genreToggle" onclick="toggleGenreList()">Gêneros</a>
+      <a href="#" class="navbar-link">Populares</a>
+      <a href="#" class="navbar-link">Novidades de A-Z</a>
+      <a href="#" class="navbar-link">Calendário de Lançamentos</a>
+      <a href="#" class="navbar-link">Simulcasts</a>
+      <a href="#" class="navbar-link">Novidades</a>
+    </div>
+  </nav>
+
+  <!-- Conteúdo Principal -->
+  <div class="main-content">
+    
+    <!-- Quadro de Reprodução -->
+    <div class="video-container">
+      <div class="video-frame">
+        <!-- Aqui você pode integrar o player de vídeo do anime -->
+      </div>
+      <div class="controls">
+        <button id="prevEpisode">Episódio Anterior</button>
+        <button id="episodeList">Lista de Episódios</button>
+        <button id="nextEpisode">Próximo Episódio</button>
+      </div>
+
+      <!-- Seção de Comentários -->
+      <div class="comments-section">
+        <input type="text" class="comment-input" placeholder="Deixe um comentário...">
+        <button class="comment-button">Enviar Comentário</button>
+        <div class="comments-list">
+          <!-- Aqui aparecerão os comentários -->
+          <div class="comment">Comentário 1</div>
+          <div class="comment">Comentário 2</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resumo do Episódio -->
+    <div class="episode-summary">
+      <h3>Resumo do Episódio</h3>
+      <p>Este é o resumo do episódio atual. Ele descreve os eventos principais do episódio, fornecendo um contexto geral para os espectadores.</p>
+    </div>
+    <script>
+        // Obter parâmetros da URL (anime e episódio)
+        const urlParams = new URLSearchParams(window.location.search);
+        const animeId = urlParams.get('anime');
+        const episodeNumber = parseInt(urlParams.get('episode'));
+      
+        console.log('Anime ID:', animeId);
+        console.log('Número do Episódio:', episodeNumber);
+      
+        // Carregar dados do anime e episódio a partir de um arquivo JSON
+        fetch('anime.json')
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Erro ao carregar o arquivo JSON: ' + response.statusText);
+            }
+            return response.json();
+          })
+          .then(data => {
+            const anime = data[animeId];
+      
+            // Verifica se o anime existe
+            if (!anime) {
+              alert('Anime não encontrado!');
+              return;
+            }
+      
+            const episode = anime.episodes[episodeNumber - 1];
+      
+            // Verifica se o episódio existe
+            if (!episode) {
+              alert('Episódio não encontrado!');
+              return;
+            }
+      
+            // Atualizar título da página, descrição e vídeo
+            document.title = `${anime.title} - Episódio ${episode.number}`;
+            document.getElementById('episode-summary').textContent = episode.description;
+            document.querySelector('.video-frame').innerHTML = `<iframe src="${episode.videoUrl}" width="100%" height="100%" frameborder="0"></iframe>`;
+      
+            // Atualizar botões de navegação
+            const prevButton = document.getElementById('prevEpisode');
+            const nextButton = document.getElementById('nextEpisode');
+            const listButton = document.getElementById('episodeList');
+      
+            // Lógica do botão "Episódio Anterior"
+            if (episodeNumber > 1) {
+              prevButton.disabled = false;
+              prevButton.onclick = () => {
+                window.location.href = `tela_anime.html?anime=${animeId}&episode=${episodeNumber - 1}`;
+              };
+            } else {
+              prevButton.disabled = true;
+            }
+      
+            // Lógica do botão "Próximo Episódio"
+            if (episodeNumber < anime.episodes.length) {
+              nextButton.disabled = false;
+              nextButton.onclick = () => {
+                window.location.href = `tela_anime.html?anime=${animeId}&episode=${episodeNumber + 1}`;
+              };
+            } else {
+              nextButton.disabled = true;
+            }
+      
+            // Botão para Lista de Episódios
+            listButton.onclick = () => {
+              window.location.href = `anime-list.html?anime=${animeId}`;
+            };
+          })
+          .catch(error => {
+            console.error('Erro na requisição:', error);
+          });
+      </script>
+      
+      
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <script src="js/funcoes.js"></script>
+</body>
+</html>
