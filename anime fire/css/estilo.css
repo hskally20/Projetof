@@ -94,32 +94,7 @@
   .navbar-link:focus {
     color: #d9534f;
     outline: none;}
-/* Estilos gerais para o carrossel */
-/* Responsividade para o carrossel */
-@media (max-width: 768px) {
-.carousel-item img {
-    max-height: 400px; /* Ajusta o tamanho das imagens */
-}
-
-.carousel-control-prev, .carousel-control-next {
-    width: 10%; /* Aumenta o tamanho dos botões */
-}
-
-.carousel-control-prev-icon, .carousel-control-next-icon {
-    width: 30px;
-    height: 30px;
-    background-color: rgba(0, 0, 0, 0.7);
-}
-}
-
-/* Para telas menores que 576px */
-@media (max-width: 576px) {
-.carousel-item img {
-    max-height: 300px; /* Ajusta o tamanho da imagem */
-}
-}
-  
-      
+   
 .anime-card {
     background-color: #1a1a1a;
     border: 1px solid #333;
@@ -217,7 +192,7 @@ margin-top: 40px;
 /* Definindo as cores principais */
 body {
     background-color: #121212; /* Fundo escuro */
-    color: white; /* Texto em branco */
+    color: rgb(0, 0, 0); /* Texto em branco */
 }
 
 /* Barra de Navegação */
@@ -259,7 +234,7 @@ color: #f0f0f0;
 }
 
 .anime-card:hover {
-    background-color: #2a2a2a; /* Hover escuro */
+    background-color: #030303; /* Hover escuro */
 }
 
 .anime-card h3 {
@@ -268,7 +243,7 @@ color: #f0f0f0;
 }
 
 .anime-card p {
-    color: #c0c0c0; /* Texto secundário em cinza claro */
+    color: #ffffff; /* Texto secundário em cinza branco */
 }
 
 /* Filtro de pesquisa */
@@ -313,7 +288,7 @@ h2 {
 .list-group-item {
     background-color: #1a1a1a; /* Fundo escuro dos episódios */
     border: 1px solid #333; /* Borda cinza escura */
-    color: #c0c0c0; /* Texto em cinza claro */
+    color: #ffffff; /* Texto em cinza claro */
     margin-bottom: 10px;
     padding: 15px;
     border-radius: 5px;
@@ -497,4 +472,312 @@ header {
   .card {
     padding: 2rem;
   }
+}
+
+.carousel-container {
+  background-color: black; /* Fundo preto */
+  color: red; /* Texto vermelho */
+  padding: 20px;
+}
+/* Estilos gerais continuam os mesmos do tema vermelho e preto */
+
+/* Estilos para o carrossel */
+.carousel-container {
+  width: 60%; /* Reduz a largura do carrossel */
+  margin: 0 auto; /* Centraliza o carrossel horizontalmente */
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: #1b1b1b;
+}
+
+.carousel-slide {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.carousel-slide img {
+  width: 100%; /* Mantém as imagens dentro da nova largura do carrossel */
+  height: auto; /* Ajusta a altura automaticamente para manter a proporção */
+  border-radius: 10px;
+}
+
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.carousel-controls button {
+  background-color: #e74c3c;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-controls button:hover {
+  background-color: #c0392b;
+}
+
+/* Posições dos botões de controle */
+.carousel-controls .prev {
+  left: 0;
+  margin-left: 10px;
+}
+
+.carousel-controls .next {
+  right: 0;
+  margin-right: 10px;
+}
+
+/* Centralizando o carrossel na página */
+.carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Preenche a altura da tela para garantir que o carrossel fique verticalmente centralizado */
+}
+
+.carousel-item img {
+  max-width: 50%; /* Ajusta a largura da imagem */
+  height: auto; /* Mantém a proporção da imagem */
+  display: block; /* Garante que a imagem seja tratada como bloco */
+}
+
+/* Estilos gerais */
+.alinhar {
+  display: flex; /* Habilita o Flexbox */
+  align-items: center; /* Alinha verticalmente os itens ao centro */
+  justify-content: center; /* Alinha horizontalmente os itens ao centro */
+  margin: 0; /* Remove a margem */
+  /* Você pode adicionar outras propriedades conforme necessário */
+}
+h1 {
+  font-size: 2.5em;
+  margin: 0;
+  color: #fff;
+}
+
+/* Botões */
+.button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #c0392b; /* Vermelho escuro */
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #e74c3c; /* Vermelho mais claro ao passar o mouse */
+}
+
+/* Layout principal */
+main {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Novidades - layout de cards */
+.novidades-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.novidade {
+  background-color: #2c2c2c; /* Preto com tom mais suave */
+  border: 1px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 300px;
+  text-align: center;
+}
+
+.novidade:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.novidade img {
+  width: 100%;
+  height: auto;
+}
+
+.novidade-info {
+  padding: 15px;
+}
+
+.novidade h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.novidade a {
+  margin-top: 10px;
+  display: block;
+}
+
+/* Populares - estilização de listas */
+.populares-container {
+  background-color: #2c2c2c;
+  border: 1px solid #333;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.populares-list {
+  padding-left: 0;
+  list-style: none;
+  counter-reset: ranked;
+}
+
+.populares-list li {
+  font-size: 1.3em;
+  margin: 10px 0;
+  padding: 10px;
+  background-color: #1e1e1e;
+  border-radius: 5px;
+  counter-increment: ranked;
+  position: relative;
+  padding-left: 40px;
+  color: #fff;
+}
+
+.populares-list li:before {
+  content: counter(ranked);
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #e74c3c;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2em;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.populares-list li strong {
+  color: #e74c3c;
+}
+
+/* Rodapé */
+footer {
+  background-color: #1b1b1b;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  position: relative;
+}
+
+footer a {
+  color: #ecf0f1;
+  text-decoration: none;
+  font-size: 1.2em;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #e74c3c; /* Cor vermelha ao passar o mouse */
+}
+/* Estilos gerais continuam os mesmos do tema vermelho e preto */
+
+/* Estilos para o calendário */
+.calendar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.days {
+  padding-left: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.day {
+  background-color: #2c2c2c;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.day:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-day {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.day-date {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #e74c3c;
+  border-bottom: 2px solid #e74c3c;
+  padding-bottom: 10px;
+}
+
+.anime-info {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.anime-info img {
+  width: 150px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.anime-details {
+  color: #fff;
+}
+
+.anime-details h2 {
+  font-size: 1.5em;
+  margin: 0;
+  color: #e74c3c;
+}
+
+.anime-details p {
+  margin: 5px 0;
+  font-size: 1em;
+  color: #f4f4f4;
+}
+
+/* Rodapé */
+footer {
+  background-color: #1b1b1b;
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 40px;
+  position: relative;
 }
