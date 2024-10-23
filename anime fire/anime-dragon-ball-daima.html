@@ -21,10 +21,10 @@
 
     <!-- Barra de pesquisa e ícone de usuário -->
     <div class="d-flex align-items-center">
-      <div class="search-bar">
-        <input type="text" class="form-control" placeholder="Pesquisar...">
-        <button class="btn btn-danger">Pesquisar</button> <!-- Botão vermelho -->
-      </div>
+        <form action="resultados.html" method="GET" class="d-flex">
+            <input type="text" class="form-control" name="query" placeholder="Pesquisar...">
+            <button type="submit" class="btn btn-danger">Pesquisar</button> <!-- Botão vermelho -->
+        </form>
       <!-- Ícone de usuário que redireciona para login/registro -->
       <a href="login.html" class="user-icon">
         <i class="bi bi-person-circle"></i> <!-- Ícone de usuário do Bootstrap -->
@@ -62,18 +62,25 @@
     </div>
   </div>
     <!-- Título do Anime e Detalhes -->
-    <div class="container mt-4">
-        <div class="row">
-            <div class="col-md-12">
-                <!-- Imagem com ajuste de tamanho -->
-                <img src="https://criticalhits.com.br/wp-content/uploads/2024/10/db-daima-key-art.jpg" alt="Dragon Ball DAIMA" class="card-img-top img-fluid">
-            </div>
-            <div class="col-md-12">
-                <h1>Dragon Ball DAIMA</h1>
-                <p class="lead">Relembrando a saga dos Saiyajins!</p>
-            </div>
+<div class="container mt-4">
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <img src="img/dragonball-novidades.webp" style="max-width: 100%;" alt="Dragon Ball DAIMA" class="card-img-top img-fluid">
+        </div>
+        <div class="col-md-6">
+            <h1>Dragon Ball DAIMA</h1>
+            <p class="lead">Detalhes</p>
+            <p class="text-white"><strong>Nota Média:</strong> 4.9 (26.5k)</p>
+            <p class="text-white"><strong>Sinopse:</strong> Goku e companhia viviam pacificamente quando de repente ficaram pequenos por causa de uma conspiração! Quando eles descobrem que o motivo para isso pode estar no "Mundo dos Demônios", um misterioso Majin chamado Glorio aparece para eles.</p>
+            <p class="text-white"><strong>Distribuidora:</strong> Toei Animation</p>
+            <p class="text-white"><strong>Áudio:</strong> Japanese</p>
+            <p class="text-white"><strong>Legendas:</strong> Português (Brasil), English, Español (América Latina), Español (España)</p>
+            <p class="text-white"><strong>Classificação de Conteúdo:</strong> A12</p>
+            <p class="text-white"><strong>Violência:</strong> Sim</p>
         </div>
     </div>
+</div>
+
     
 
     <!-- Filtro de Temporada -->

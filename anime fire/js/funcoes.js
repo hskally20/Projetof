@@ -24,3 +24,14 @@ function closeGenreList() {
   overlay.style.display = 'none';  // Oculta o overlay
 }
 
+const urlParams = new URLSearchParams(window.location.search);
+const query = urlParams.get('query');
+const resultadosDiv = document.getElementById('resultados');
+
+if (query) {
+    // Simulação de resultados - substitua isso com a lógica real de busca
+    resultadosDiv.innerHTML = `<p>Você pesquisou por: <strong>${query}</strong></p>`;
+    // Aqui você pode adicionar lógica para exibir resultados reais.
+} else {
+    resultadosDiv.innerHTML = '<p>Nenhum resultado encontrado.</p>';
+}

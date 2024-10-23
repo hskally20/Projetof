@@ -28,10 +28,11 @@
 
     <!-- Barra de pesquisa e ícone de usuário -->
     <div class="d-flex align-items-center">
-      <div class="search-bar">
-        <input type="text" class="form-control" placeholder="Pesquisar...">
-        <button class="btn btn-danger">Pesquisar</button> <!-- Botão vermelho -->
-      </div>
+      <div class="d-flex align-items-center">
+        <form action="resultados.html" method="GET" class="d-flex">
+          <input type="text" class="form-control" name="query" placeholder="Pesquisar...">
+          <button type="submit" class="btn btn-danger">Pesquisar</button> <!-- Botão vermelho -->
+        </form>
       <!-- Ícone de usuário que redireciona para login/registro -->
       <a href="login.html" class="user-icon">
         <i class="bi bi-person-circle"></i> <!-- Ícone de usuário do Bootstrap -->

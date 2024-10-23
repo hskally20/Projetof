@@ -12,17 +12,34 @@
     <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
+  <!-- Header -->
+  <header>
+    <!-- Logo -->
+    <div class="logo">
+      <img src="img/teste3.png" alt="Logo Anime Fire" class="logo-img">
+    </div>
+
+    <!-- Barra de pesquisa e ícone de usuário -->
+    <div class="d-flex align-items-center">
+      <form action="resultados.html" method="GET" class="d-flex">
+        <input type="text" class="form-control" name="query" placeholder="Pesquisar...">
+        <button type="submit" class="btn btn-danger">Pesquisar</button> <!-- Botão vermelho -->
+      </form>
+      <!-- Ícone de usuário que redireciona para login/registro -->
+      <a href="login.html" class="user-icon">
+        <i class="bi bi-person-circle"></i> <!-- Ícone de usuário do Bootstrap -->
+      </a>
+    </div>
+  </header>
 
   <!-- Cabeçalho -->
   <nav class="navbar-container">
     <div class="navbar">
       <a href="animefire.html" class="navbar-link">Início</a>
-      <a class="navbar-link" href="#" id="genreToggle" onclick="toggleGenreList()">Gêneros</a>
-      <a href="#" class="navbar-link">Populares</a>
-      <a href="#" class="navbar-link">Novidades de A-Z</a>
-      <a href="#" class="navbar-link">Calendário de Lançamentos</a>
-      <a href="#" class="navbar-link">Simulcasts</a>
-      <a href="#" class="navbar-link">Novidades</a>
+      <a class="nav-link" href="#" id="genreToggle" onclick="toggleGenreList()">Gêneros</a>
+      <a href="populares.html" class="navbar-link">Populares</a>
+      <a href="calendario.html" class="navbar-link">Calendário de Lançamentos</a>
+      <a href="novidadades.html" class="navbar-link">Novidades</a>
     </div>
   </nav>
 

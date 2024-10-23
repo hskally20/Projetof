@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultados da Pesquisa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <!-- Logo -->
+        <div class="logo">
+            <img src="img/teste3.png" alt="Logo Anime Fire" class="logo-img">
+        </div>
+
+        <!-- Barra de pesquisa e ícone de usuário -->
+        <div class="d-flex align-items-center">
+            <div class="d-flex align-items-center">
+                  <form action="resultados.html" method="GET" class="d-flex">
+                    <input type="text" class="form-control" name="query" placeholder="Pesquisar...">
+                    <button type="submit" class="btn btn-danger">Pesquisar</button> <!-- Botão vermelho -->
+                  </form>
+            <a href="login.html" class="user-icon">
+                <i class="bi bi-person-circle"></i>
+            </a>
+        </div>
+    </header>
+
+    <!-- Menu de navegação -->
+    <nav class="navbar-container">
+        <div class="navbar">
+            <a href="animefire.html" class="navbar-link">Início</a>
+            <a class="nav-link" href="#" id="genreToggle" onclick="toggleGenreList()">Gêneros</a>
+            <a href="populares.html" class="navbar-link">Populares</a>
+            <a href="calendario.html" class="navbar-link">Calendário de Lançamentos</a>
+            <a href="novidades.html" class="navbar-link">Novidades</a>
+        </div>
+    </nav>
+
+    <!-- Overlay de gêneros -->
+    <div class="overlay" id="genreOverlay">
+        <div class="genre-list">
+            <h3>Gêneros</h3>
+            <ul>
+                <li>Ação</li>
+                <li>Aventura</li>
+                <li>Comédia</li>
+                <li>Drama</li>
+                <li>Fantasia</li>
+                <li>Romance</li>
+                <li>Ficção Científica</li>
+                <li>Shounen</li>
+                <li>Shoujo</li>
+                <li>Sobrenatural</li>
+            </ul>
+            <button class="close-btn" onclick="closeGenreList()">Fechar</button>
+        </div>
+    </div>
+
+    <main>
+        <div>
+            <h1>Resultados da Pesquisa</h1>
+        </div>
+        <div class="container">
+            <div id="resultados" class="mt-3"></div>
+        </div>
+    </main>
+
+    <footer>
+        <a href="animefire.html">Voltar à página inicial</a>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="js/funcoes.js"></script>
+    <script>
+     document.addEventListener('DOMContentLoaded', function () {
+        const animes = {
+            "rezero": {
+                "title": "Re:Zero - Starting Life in Another World",
+                "description": "Novos episódios disponíveis!",
+                "image": "img/rezero.jfif",
+                "episodesLink": "rezero.html",
+                "episodes": []
+            },
+            "seirei-gensouki": {
+                "title": "Seirei Gensouki 2",
+                "description": "Novos episódios esta semana!",
+                "image": "img/seireigensouki.webp",
+                "episodesLink": "anime-seirei-gensouki.html",
+                "episodes": []
+            },
+            "dragon-ball-daima": {
+                "title": "Dragon Ball DAIMA",
+                "description": "Relembrando a saga dos Saiyajins!",
+                "image": "img/dragonball-novidades.webp",
+                "episodesLink": "anime-dragon-ball-daima.html",
+                "episodes": []
+            },
+            "bleach": {
+                "title": "Bleach: Sennen Kessen-hen",
+                "description": "Últimos episódios da série!",
+                "image": "img/bleach-novidades.webp",
+                "episodesLink": "anime-bleach.html",
+                "episodes": []
+            }
+        };
+    
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('query').toLowerCase();
+        const resultadosDiv = document.getElementById('resultados');
+        const detalhesDiv = document.getElementById('detalhes'); // Div para detalhes do anime
+        let resultadosEncontrados = false;
+    
+        for (const key in animes) {
+            const anime = animes[key];
+            // Verifica apenas o título
+            if (anime.title.toLowerCase().includes(query)) {
+                resultadosEncontrados = true;
+                resultadosDiv.innerHTML += `
+                    <div class="card mb-3 anime-card" onclick="mostrarDetalhes('${key}')">
+                        <div>
+                            <a href="${anime.episodesLink}" class="card-title">${anime.title}</a>
+                            <p class="card-text">${anime.description}</p>
+                            <img src="${anime.image}" alt="${anime.title}" class="img-fluid">
+                            <h6>Episódios:</h6>
+                            <ul>
+                                ${anime.episodes.map(ep => `<li>${ep.title}</li>`).join('')}
+                            </ul>
+                            <a href="${anime.episodesLink}" class="btn btn-primary">Ver Lista de Episódios</a>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    
+        if (!resultadosEncontrados) {
+            resultadosDiv.innerHTML = '<p>Nenhum resultado encontrado.</p>';
+        }
+    
+        // Função para mostrar detalhes do anime
+        window.mostrarDetalhes = function(key) {
+            const anime = animes[key];
+            detalhesDiv.innerHTML = `
+                <h2>${anime.title}</h2>
+                <img src="${anime.image}" alt="${anime.title}" class="img-fluid">
+                <p>${anime.description}</p>
+                <a href="${anime.episodesLink}" class="btn btn-primary">Ver Lista de Episódios</a>
+            `;
+        }
+    });
+    
+    </script>
+    
+</body>
+</html>

@@ -174,12 +174,26 @@ margin-top: 40px;
     display: flex;
     justify-content: space-around;
   }
-  
+  .card-title {
+    color: white; /* Altera a cor do título do anime para branco */
+}
+
+.card-text {
+    color: white; /* Altera a cor do texto da descrição para branco */
+}
+
+.card {
+    background-color: transparent; /* Opcional: torna o fundo do card transparente */
+}
+
+.card ul {
+    color: white; /* Altera a cor do texto da lista de episódios para branco */
+}
   .anime-card {
     width: 200px;
     margin: 10px;
   }
-  
+
   .anime-card img {
     width: 100%;
   }
