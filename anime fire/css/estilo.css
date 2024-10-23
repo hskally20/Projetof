@@ -355,7 +355,7 @@ h2 {
 
 
 .nav-link {
-    color: #fff !important;
+    color: #fff9f9 !important;
 }
 /* Estilo do overlay */
 .overlay {
@@ -388,6 +388,7 @@ padding: 0;
 margin: 10px 0;
 cursor: pointer;
 transition: color 0.3s ease;
+color: #fff;
 }
 
 .genre-list ul li:hover {
@@ -412,7 +413,7 @@ cursor: pointer;
 margin-top: 15px;
 padding: 5px 10px;
 background-color: red;
-color: rgb(0, 0, 0);
+color: rgb(255, 255, 255);
 border: none;
 border-radius: 5px;
 }
@@ -696,7 +697,9 @@ footer a {
   font-size: 1.2em;
   transition: color 0.3s ease;
 }
-
+.text-white {
+  color: white;
+}
 footer a:hover {
   color: #e74c3c; /* Cor vermelha ao passar o mouse */
 }
