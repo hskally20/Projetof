@@ -441,4 +441,60 @@ color: rgb(0, 0, 0);
 border: none;
 border-radius: 5px;
 }
-  
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  height: 30px; /* Ajuste a altura conforme necessário */
+}
+.logo-img {
+  max-height: 270px; /* Controla a altura da imagem */
+  max-width: 55%; /* Mantém a proporção correta */
+}
+.user-menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px; /* Espaçamento entre os itens do menu */
+}
+.search-bar input {
+  width: 200px; /* Ajuste o tamanho da barra de pesquisa */
+}
+.search-bar button {
+  margin-left: 5px;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #1d1d1d; /* Fundo preto */
+}
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.user-icon {
+  font-size: 2rem;
+  color: #fff; /* Mantendo o ícone branco */
+  margin-left: 10px;
+}
+.card {
+  border-radius: 10px;
+  border: none;
+}
+.btn-primary {
+  background-color: #ff4500; /* Cor do botão semelhante ao esquema de cores */
+  border: none;
+}
+.btn-primary:hover {
+  background-color: #ff5722; /* Efeito hover */
+}
+/* Para telas menores */
+@media (max-width: 576px) {
+  .card {
+    padding: 2rem;
+  }
+}
