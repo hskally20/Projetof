@@ -24,6 +24,3 @@ function closeGenreList() {
   overlay.style.display = 'none';  // Oculta o overlay
 }
 
-var myCarousel = document.querySelector('#animeCarousel');
-var carousel = new bootstrap.Carousel(myCarousel);
-
