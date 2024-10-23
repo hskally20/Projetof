@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bleach: Sennen Kessen-hen - Episódios</title>
+    <title>Anime Player - Episódios</title>
 
     <!-- Link para o CSS do Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -17,7 +17,7 @@
   <nav class="navbar-container">
     <div class="navbar">
       <a href="animefire.html" class="navbar-link">Início</a>
-      <a class="nav-link" href="#" id="genreToggle" onclick="toggleGenreList()">Gêneros</a>
+      <a class="navbar-link" href="#" id="genreToggle" onclick="toggleGenreList()">Gêneros</a>
       <a href="#" class="navbar-link">Populares</a>
       <a href="#" class="navbar-link">Novidades de A-Z</a>
       <a href="#" class="navbar-link">Calendário de Lançamentos</a>
@@ -27,91 +27,225 @@
   </nav>
 
   <!-- Conteúdo Principal -->
-  <div class="main-content">
+  <div class="main-content container">
     
     <!-- Título do Anime e Episódio -->
-    <div id="anime-title">
-      <h1 id="anime-name"></h1>
-      <h2 id="episode-title"></h2>
+    <div id="anime-title" class="text-center mt-4">
+      <h1 id="anime-name" class="text-white"></h1>
+      <h2 id="episode-title" class="text-white"></h2>
     </div>
 
-    <!-- Quadro de Reprodução -->
-    <div class="video-container">
-      <div class="video-frame" id="video-frame">
-        <!-- O player do episódio será carregado aqui -->
-      </div>
-      <div class="controls">
-        <button id="prevEpisode">Episódio Anterior</button>
-        <button id="episodeList">Lista de Episódios</button>
-        <button id="nextEpisode">Próximo Episódio</button>
+    <!-- Quadro de Reprodução e Resumo -->
+    <div class="row">
+      <!-- Quadro de Reprodução -->
+      <div class="col-md-8">
+        <div class="video-container mb-3">
+          <div class="video-frame" id="video-frame" style="background-color: #000; height: 450px;">
+            <!-- O player do episódio será carregado aqui -->
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mb-3">
+          <button class="btn btn-danger" id="prevEpisode">Episódio Anterior</button>
+          <button class="btn btn-danger" id="episodeList">Lista de Episódios</button>
+          <button class="btn btn-danger" id="nextEpisode">Próximo Episódio</button>
+        </div>
       </div>
 
-      <!-- Seção de Comentários -->
-      <div class="comments-section">
-        <input type="text" class="comment-input" placeholder="Deixe um comentário...">
-        <button class="comment-button">Enviar Comentário</button>
-        <div class="comments-list">
-          <!-- Aqui aparecerão os comentários -->
-          <div class="comment">Comentário 1</div>
-          <div class="comment">Comentário 2</div>
+      <!-- Resumo do Episódio -->
+      <div class="col-md-4">
+        <div class="episode-summary p-3" id="episode-summary" style="background-color: #222; color: white; border-radius: 10px;">
+          <h3>Resumo do Episódio</h3>
+          <p id="episode-description">Descrição do episódio será carregada aqui.</p>
+          <p id="episode-release-date">Data de lançamento será carregada aqui.</p>
         </div>
       </div>
     </div>
 
-    <!-- Resumo do Episódio -->
-    <div class="episode-summary" id="episode-summary">
-      <h3>Resumo do Episódio</h3>
-      <p id="episode-description">Descrição do episódio será carregada aqui.</p>
-      <p id="episode-release-date">Data de lançamento será carregada aqui.</p>
+    <!-- Seção de Comentários -->
+    <div class="comments-section">
+      <input type="text" class="form-control comment-input mb-2" placeholder="Deixe um comentário...">
+      <button class="btn btn-danger comment-button mb-3">Enviar Comentário</button>
+      <div class="comments-list">
+        <!-- Aqui aparecerão os comentários -->
+        <div class="comment">Comentário 1</div>
+        <div class="comment">Comentário 2</div>
+      </div>
     </div>
 
   </div>
 
+  <!-- JavaScript com JSON Embutido -->
+ 
+  
   <script>
+    // Dados dos animes
+    const animeData = {
+    "rezero": {
+      "title": "Re:Zero - Starting Life in Another World",
+      "description": "Natsuki Subaru, um adolescente comum, conhece uma linda garota de cabelos prateados vinda de outro mundo. Subaru quer ficar ao lado dela, mas o fardo que ela carrega é maior do que Subaru pode imaginar.",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "O Início do Poder",
+          "description": "A história de Ryoma começa em seu novo mundo, enquanto ele explora suas habilidades mágicas e encontra novos amigos.",
+          "releaseDate": "01/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-rezero-1"
+        },
+        {
+          "number": 2,
+          "title": "A Luta Pela Sobrevivência",
+          "description": "Ryoma e seus amigos enfrentam um inimigo misterioso que ameaça a paz em sua nova casa.",
+          "releaseDate": "08/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-rezero-2"
+        },
+        {
+          "number": 3,
+          "title": "O Poder Se Revela",
+          "description": "Com uma batalha intensa, Ryoma descobre a verdadeira extensão de seus poderes e seus novos aliados.",
+          "releaseDate": "15/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-rezero-3"
+        },
+        {
+          "number": 4,
+          "title": "A Decisão Final",
+          "description": "Enquanto uma ameaça maior surge, Ryoma precisa fazer escolhas difíceis para proteger aqueles que ama.",
+          "releaseDate": "22/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-rezero-4"
+        }
+      ]
+    },
+    "seirei-gensouki": {
+      "title": "Seirei Gensouki 2",
+      "description": "A história de Ryoma começa em seu novo mundo, enquanto ele explora suas habilidades mágicas e encontra novos amigos.",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "O Início do Poder",
+          "description": "A história de Ryoma começa em seu novo mundo, enquanto ele explora suas habilidades mágicas e encontra novos amigos.",
+          "releaseDate": "01/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-seirei-1"
+        },
+        {
+          "number": 2,
+          "title": "A Luta Pela Sobrevivência",
+          "description": "Ryoma e seus amigos enfrentam um inimigo misterioso que ameaça a paz em sua nova casa.",
+          "releaseDate": "08/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-seirei-2"
+        },
+        {
+          "number": 3,
+          "title": "O Poder Se Revela",
+          "description": "Com uma batalha intensa, Ryoma descobre a verdadeira extensão de seus poderes e seus novos aliados.",
+          "releaseDate": "15/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-seirei-3"
+        },
+        {
+          "number": 4,
+          "title": "A Decisão Final",
+          "description": "Enquanto uma ameaça maior surge, Ryoma precisa fazer escolhas difíceis para proteger aqueles que ama.",
+          "releaseDate": "22/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-seirei-4"
+        }
+      ]
+    },
+    "dragon-ball-daima": {
+      "title": "Dragon Ball DAIMA",
+      "description": "Relembrando a saga dos Saiyajins!",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "O Retorno dos Saiyajins",
+          "description": "Após anos de paz, Goku e seus amigos devem enfrentar novos inimigos e rever velhos rostos da sua infância. O legado dos Saiyajins está mais vivo do que nunca!",
+          "releaseDate": "01/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-dragonball-1"
+        },
+        {
+          "number": 2,
+          "title": "A Força do Super Saiyajin",
+          "description": "Goku treina arduamente para alcançar o novo nível de poder. Enquanto isso, novos rivais surgem no horizonte, buscando derrubar o herói.",
+          "releaseDate": "08/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-dragonball-2"
+        },
+        {
+          "number": 3,
+          "title": "Confronto com Vegeta",
+          "description": "Goku e Vegeta se enfrentam em uma batalha épica. O destino do universo está em jogo e apenas o mais forte sairá vitorioso.",
+          "releaseDate": "15/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-dragonball-3"
+        },
+        {
+          "number": 4,
+          "title": "O Poder dos Saiyajins",
+          "description": "Goku, Vegeta e seus aliados se unem para enfrentar uma ameaça desconhecida. No entanto, a verdadeira força dos Saiyajins está prestes a ser revelada.",
+          "releaseDate": "22/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-dragonball-4"
+        }
+      ]
+    },
+    "bleach": {
+      "title": "Bleach: Sennen Kessen-hen",
+      "description": "Últimos episódios da série!",
+      "episodes": [
+        {
+          "number": 1,
+          "title": "O Novo Início",
+          "description": "Os antigos guerreiros de Bleach se preparam para o último e mais épico confronto contra os novos inimigos que ameaçam o mundo.",
+          "releaseDate": "05/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-bleach-1"
+        },
+        {
+          "number": 2,
+          "title": "A Guerra Final",
+          "description": "Os maiores confrontos entre Shinigamis e Quincies estão prestes a acontecer. Tudo está em jogo neste último arco de Bleach!",
+          "releaseDate": "12/10/2024",
+          "videoUrl": "https://www.youtube.com/embed/video-bleach-2"
+        }
+      ]
+    }
+  }
+
+
     // Obter parâmetros da URL (anime e episódio)
     const urlParams = new URLSearchParams(window.location.search);
-    const animeId = urlParams.get('anime');  // Exemplo: 'rezero', 'seirei-gensouki'
-    const episodeNumber = urlParams.get('episode');  // Exemplo: '1', '2'
+    const animeId = urlParams.get('anime'); // Exemplo: 'rezero', 'seirei-gensouki'
+    const episodeNumber = parseInt(urlParams.get('episode')); // Exemplo: '1', '2'
 
-    // Carregar dados do anime e episódio a partir de um arquivo JSON
-    fetch('animes.json')
-      .then(response => response.json())
-      .then(data => {
-        const anime = data[animeId];
-        const episode = anime.episodes[episodeNumber - 1];
+    // Verificar se o anime e o episódio existem
+    if (animeData[animeId] && animeData[animeId].episodes[episodeNumber - 1]) {
+      const anime = animeData[animeId];
+      const episode = anime.episodes[episodeNumber - 1];
 
-        // Atualizar título do anime e título do episódio
-        document.getElementById('anime-name').textContent = anime.title;
-        document.getElementById('episode-title').textContent = `Episódio ${episode.number} - ${episode.title}`;
-        
-        // Atualizar descrição e data de lançamento
-        document.getElementById('episode-description').textContent = episode.description;
-        document.getElementById('episode-release-date').textContent = `Data de lançamento: ${episode.releaseDate}`;
+      // Atualizar título do anime e título do episódio
+      document.getElementById('anime-name').textContent = anime.title;
+      document.getElementById('episode-title').textContent = `Episódio ${episode.number}`;
 
-        // Atualizar o vídeo
-        document.getElementById('video-frame').innerHTML = `<iframe src="${episode.videoUrl}" width="100%" height="100%" frameborder="0"></iframe>`;
+      // Atualizar descrição e data de lançamento
+      document.getElementById('episode-description').textContent = episode.description;
 
-        // Atualizar botões de navegação
-        const prevButton = document.getElementById('prevEpisode');
-        const nextButton = document.getElementById('nextEpisode');
-        const listButton = document.getElementById('episodeList');
+      // Atualizar o vídeo
+      document.getElementById('video-frame').innerHTML = `<iframe src="${episode.videoUrl}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
 
-        if (episodeNumber > 1) {
-          prevButton.setAttribute('onclick', `location.href='anime.html?anime=${animeId}&episode=${parseInt(episodeNumber) - 1}'`);
-        } else {
-          prevButton.disabled = true;
-        }
+      // Atualizar botões de navegação
+      const prevButton = document.getElementById('prevEpisode');
+      const nextButton = document.getElementById('nextEpisode');
+      const listButton = document.getElementById('episodeList');
 
-        if (episodeNumber < anime.episodes.length) {
-          nextButton.setAttribute('onclick', `location.href='anime.html?anime=${animeId}&episode=${parseInt(episodeNumber) + 1}'`);
-        } else {
-          nextButton.disabled = true;
-        }
+      if (episodeNumber > 1) {
+        prevButton.onclick = () => { location.href = `tela_anime.html?anime=${animeId}&episode=${episodeNumber - 1}`; };
+      } else {
+        prevButton.disabled = true;
+      }
 
-        listButton.setAttribute('onclick', `location.href='anime-list.html?anime=${animeId}'`);
-      })
-      .catch(error => console.error('Erro ao carregar dados do anime:', error));
+      if (episodeNumber < anime.episodes.length) {
+        nextButton.onclick = () => { location.href = `tela_anime.html?anime=${animeId}&episode=${episodeNumber + 1}`; };
+      } else {
+        nextButton.disabled = true;
+      }
+
+      listButton.onclick = () => { location.href = 'anime-'+ animeId +'.html'; }; // Mudar conforme necessário
+    } else {
+      console.error('Anime ou episódio não encontrado.');
+    }
   </script>
-
 </body>
 </html>
