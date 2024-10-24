@@ -76,84 +76,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script src="js/funcoes.js"></script>
-    <script>
-     document.addEventListener('DOMContentLoaded', function () {
-        const animes = {
-            "rezero": {
-                "title": "Re:Zero - Starting Life in Another World",
-                "description": "Novos episódios disponíveis!",
-                "image": "img/rezero.jfif",
-                "episodesLink": "rezero.html",
-                "episodes": []
-            },
-            "seirei-gensouki": {
-                "title": "Seirei Gensouki 2",
-                "description": "Novos episódios esta semana!",
-                "image": "img/seireigensouki.webp",
-                "episodesLink": "anime-seirei-gensouki.html",
-                "episodes": []
-            },
-            "dragon-ball-daima": {
-                "title": "Dragon Ball DAIMA",
-                "description": "Relembrando a saga dos Saiyajins!",
-                "image": "img/dragonball-novidades.webp",
-                "episodesLink": "anime-dragon-ball-daima.html",
-                "episodes": []
-            },
-            "bleach": {
-                "title": "Bleach: Sennen Kessen-hen",
-                "description": "Últimos episódios da série!",
-                "image": "img/bleach-novidades.webp",
-                "episodesLink": "anime-bleach.html",
-                "episodes": []
-            }
-        };
-    
-        const urlParams = new URLSearchParams(window.location.search);
-        const query = urlParams.get('query').toLowerCase();
-        const resultadosDiv = document.getElementById('resultados');
-        const detalhesDiv = document.getElementById('detalhes'); // Div para detalhes do anime
-        let resultadosEncontrados = false;
-    
-        for (const key in animes) {
-            const anime = animes[key];
-            // Verifica apenas o título
-            if (anime.title.toLowerCase().includes(query)) {
-                resultadosEncontrados = true;
-                resultadosDiv.innerHTML += `
-                    <div class="card mb-3 anime-card" onclick="mostrarDetalhes('${key}')">
-                        <div>
-                            <a href="${anime.episodesLink}" class="card-title">${anime.title}</a>
-                            <p class="card-text">${anime.description}</p>
-                            <img src="${anime.image}" alt="${anime.title}" class="img-fluid">
-                            <h6>Episódios:</h6>
-                            <ul>
-                                ${anime.episodes.map(ep => `<li>${ep.title}</li>`).join('')}
-                            </ul>
-                            <a href="${anime.episodesLink}" class="btn btn-primary">Ver Lista de Episódios</a>
-                        </div>
-                    </div>
-                `;
-            }
-        }
-    
-        if (!resultadosEncontrados) {
-            resultadosDiv.innerHTML = '<p>Nenhum resultado encontrado.</p>';
-        }
-    
-        // Função para mostrar detalhes do anime
-        window.mostrarDetalhes = function(key) {
-            const anime = animes[key];
-            detalhesDiv.innerHTML = `
-                <h2>${anime.title}</h2>
-                <img src="${anime.image}" alt="${anime.title}" class="img-fluid">
-                <p>${anime.description}</p>
-                <a href="${anime.episodesLink}" class="btn btn-primary">Ver Lista de Episódios</a>
-            `;
-        }
-    });
-    
-    </script>
+ 
+     
     
 </body>
 </html>

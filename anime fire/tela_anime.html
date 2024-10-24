@@ -42,7 +42,25 @@
       <a href="novidadades.html" class="navbar-link">Novidades</a>
     </div>
   </nav>
-
+   <!-- Overlay de gêneros -->
+  <div class="overlay" id="genreOverlay">
+    <div class="genre-list">
+      <h3>Gêneros</h3>
+      <ul>
+        <li>Ação</li>
+        <li>Aventura</li>
+        <li>Comédia</li>
+        <li>Drama</li>
+        <li>Fantasia</li>
+        <li>Romance</li>
+        <li>Ficção Científica</li>
+        <li>Shounen</li>
+        <li>Shoujo</li>
+        <li>Sobrenatural</li>
+      </ul>
+      <button class="close-btn" onclick="closeGenreList()">Fechar</button>
+    </div>
+  </div>
   <!-- Conteúdo Principal -->
   <div class="main-content container">
     
@@ -93,176 +111,7 @@
 
   <!-- JavaScript com JSON Embutido -->
  
+  <script src="js/funcoes.js"></script>
   
-  <script>
-    // Dados dos animes
-    const animeData = {
-    "rezero": {
-      "title": "Re:Zero - Starting Life in Another World",
-      "description": "Natsuki Subaru, um adolescente comum, conhece uma linda garota de cabelos prateados vinda de outro mundo. Subaru quer ficar ao lado dela, mas o fardo que ela carrega é maior do que Subaru pode imaginar.",
-      "episodes": [
-        {
-          "number": 1,
-          "title": "O Início do Poder",
-          "description": "A história de Ryoma começa em seu novo mundo, enquanto ele explora suas habilidades mágicas e encontra novos amigos.",
-          "releaseDate": "01/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-rezero-1"
-        },
-        {
-          "number": 2,
-          "title": "A Luta Pela Sobrevivência",
-          "description": "Ryoma e seus amigos enfrentam um inimigo misterioso que ameaça a paz em sua nova casa.",
-          "releaseDate": "08/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-rezero-2"
-        },
-        {
-          "number": 3,
-          "title": "O Poder Se Revela",
-          "description": "Com uma batalha intensa, Ryoma descobre a verdadeira extensão de seus poderes e seus novos aliados.",
-          "releaseDate": "15/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-rezero-3"
-        },
-        {
-          "number": 4,
-          "title": "A Decisão Final",
-          "description": "Enquanto uma ameaça maior surge, Ryoma precisa fazer escolhas difíceis para proteger aqueles que ama.",
-          "releaseDate": "22/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-rezero-4"
-        }
-      ]
-    },
-    "seirei-gensouki": {
-      "title": "Seirei Gensouki 2",
-      "description": "A história de Ryoma começa em seu novo mundo, enquanto ele explora suas habilidades mágicas e encontra novos amigos.",
-      "episodes": [
-        {
-          "number": 1,
-          "title": "O Início do Poder",
-          "description": "A história de Ryoma começa em seu novo mundo, enquanto ele explora suas habilidades mágicas e encontra novos amigos.",
-          "releaseDate": "01/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-seirei-1"
-        },
-        {
-          "number": 2,
-          "title": "A Luta Pela Sobrevivência",
-          "description": "Ryoma e seus amigos enfrentam um inimigo misterioso que ameaça a paz em sua nova casa.",
-          "releaseDate": "08/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-seirei-2"
-        },
-        {
-          "number": 3,
-          "title": "O Poder Se Revela",
-          "description": "Com uma batalha intensa, Ryoma descobre a verdadeira extensão de seus poderes e seus novos aliados.",
-          "releaseDate": "15/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-seirei-3"
-        },
-        {
-          "number": 4,
-          "title": "A Decisão Final",
-          "description": "Enquanto uma ameaça maior surge, Ryoma precisa fazer escolhas difíceis para proteger aqueles que ama.",
-          "releaseDate": "22/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-seirei-4"
-        }
-      ]
-    },
-    "dragon-ball-daima": {
-      "title": "Dragon Ball DAIMA",
-      "description": "Relembrando a saga dos Saiyajins!",
-      "episodes": [
-        {
-          "number": 1,
-          "title": "O Retorno dos Saiyajins",
-          "description": "Após anos de paz, Goku e seus amigos devem enfrentar novos inimigos e rever velhos rostos da sua infância. O legado dos Saiyajins está mais vivo do que nunca!",
-          "releaseDate": "01/10/2024",
-          "videoUrl": "video/DBZB.mp4 "
-        },
-        {
-          "number": 2,
-          "title": "A Força do Super Saiyajin",
-          "description": "Goku treina arduamente para alcançar o novo nível de poder. Enquanto isso, novos rivais surgem no horizonte, buscando derrubar o herói.",
-          "releaseDate": "08/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-dragonball-2"
-        },
-        {
-          "number": 3,
-          "title": "Confronto com Vegeta",
-          "description": "Goku e Vegeta se enfrentam em uma batalha épica. O destino do universo está em jogo e apenas o mais forte sairá vitorioso.",
-          "releaseDate": "15/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-dragonball-3"
-        },
-        {
-          "number": 4,
-          "title": "O Poder dos Saiyajins",
-          "description": "Goku, Vegeta e seus aliados se unem para enfrentar uma ameaça desconhecida. No entanto, a verdadeira força dos Saiyajins está prestes a ser revelada.",
-          "releaseDate": "22/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-dragonball-4"
-        }
-      ]
-    },
-    "bleach": {
-      "title": "Bleach: Sennen Kessen-hen",
-      "description": "Últimos episódios da série!",
-      "episodes": [
-        {
-          "number": 1,
-          "title": "O Novo Início",
-          "description": "Os antigos guerreiros de Bleach se preparam para o último e mais épico confronto contra os novos inimigos que ameaçam o mundo.",
-          "releaseDate": "05/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-bleach-1"
-        },
-        {
-          "number": 2,
-          "title": "A Guerra Final",
-          "description": "Os maiores confrontos entre Shinigamis e Quincies estão prestes a acontecer. Tudo está em jogo neste último arco de Bleach!",
-          "releaseDate": "12/10/2024",
-          "videoUrl": "https://www.youtube.com/embed/video-bleach-2"
-        }
-      ]
-    }
-  }
-
-
-    // Obter parâmetros da URL (anime e episódio)
-    const urlParams = new URLSearchParams(window.location.search);
-    const animeId = urlParams.get('anime'); // Exemplo: 'rezero', 'seirei-gensouki'
-    const episodeNumber = parseInt(urlParams.get('episode')); // Exemplo: '1', '2'
-
-    // Verificar se o anime e o episódio existem
-    if (animeData[animeId] && animeData[animeId].episodes[episodeNumber - 1]) {
-      const anime = animeData[animeId];
-      const episode = anime.episodes[episodeNumber - 1];
-
-      // Atualizar título do anime e título do episódio
-      document.getElementById('anime-name').textContent = anime.title;
-      document.getElementById('episode-title').textContent = `Episódio ${episode.number}`;
-
-      // Atualizar descrição e data de lançamento
-      document.getElementById('episode-description').textContent = episode.description;
-
-      // Atualizar o vídeo
-      document.getElementById('video-frame').innerHTML = `<iframe src="${episode.videoUrl}" width="100%" height="100%" frameborder="0" allowfullscreen></iframe>`;
-
-      // Atualizar botões de navegação
-      const prevButton = document.getElementById('prevEpisode');
-      const nextButton = document.getElementById('nextEpisode');
-      const listButton = document.getElementById('episodeList');
-
-      if (episodeNumber > 1) {
-        prevButton.onclick = () => { location.href = `tela_anime.html?anime=${animeId}&episode=${episodeNumber - 1}`; };
-      } else {
-        prevButton.disabled = true;
-      }
-
-      if (episodeNumber < anime.episodes.length) {
-        nextButton.onclick = () => { location.href = `tela_anime.html?anime=${animeId}&episode=${episodeNumber + 1}`; };
-      } else {
-        nextButton.disabled = true;
-      }
-
-      listButton.onclick = () => { location.href = 'anime-'+ animeId +'.html'; }; // Mudar conforme necessário
-    } else {
-      console.error('Anime ou episódio não encontrado.');
-    }
-  </script>
 </body>
 </html>
