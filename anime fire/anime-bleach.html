@@ -84,29 +84,31 @@
     </div>
 </div>
 
-  <!-- Filtro de Temporada -->
-  <div class="container">
-      <div class="row">
-          <div class="col-md-4">
-              <select class="form-select" aria-label="Filtro de Temporada">
-                  <option selected>Filtrar por Temporada</option>
-                  <option value="1">Temporada 1</option>
-                  <option value="2">Temporada 2</option>
-                  <option value="3">Temporada 3</option>
-              </select>
-          </div>
+<div class="container">
+  <div class="row">
+      <div class="col-md-4">
+          <select class="form-select" id="seasonFilter" aria-label="Filtro de Temporada">
+              <option selected value="">Filtrar por Temporada</option>
+              <option value="1">Temporada 1</option>
+              <option value="2">Temporada 2</option>
+              <option value="3">Temporada 3</option>
+          </select>
       </div>
   </div>
+</div>
 
-  <!-- Listagem de Episódios -->
-  <div class="container mt-4">
-      <h2>Episódios</h2>
-      <div class="list-group">
+<!-- Listagem de Episódios -->
+<div class="container mt-4">
+  <h2>Episódios de Bleach</h2>
+  <div class="list-group">
+      <div class="episode season-1">
           <a href="tela_anime.html?anime=bleach&episode=1" class="list-group-item list-group-item-action">
               <h5 class="mb-1">Episódio 1 - O Novo Início</h5>
               <p class="mb-1">Os antigos guerreiros de Bleach se preparam para o último e mais épico confronto contra os novos inimigos que ameaçam o mundo.</p>
               <small>Data de lançamento: 05/10/2024</small>
           </a>
+      </div>
+      <div class="episode season-1">
           <a href="tela_anime.html?anime=bleach&episode=2" class="list-group-item list-group-item-action">
               <h5 class="mb-1">Episódio 2 - A Guerra Final</h5>
               <p class="mb-1">Os maiores confrontos entre Shinigamis e Quincies estão prestes a acontecer. Tudo está em jogo neste último arco de Bleach!</p>
@@ -114,7 +116,6 @@
           </a>
       </div>
   </div>
-
   <!-- Sugestões de Animes Similares -->
   <div class="container mt-4">
       <h2>Similares a Este</h2>
@@ -131,6 +132,19 @@
                   </div>
               </a>
           </div>
+
+          <div class="col-md-4">
+            <a href="anime-seirei-gensouki.html">
+                <div class="anime-card">
+                    <img src="img/seireigensouki.webp" class="card-img-top" alt="Dragon Ball DAIMA">
+                    <div class="card-body">
+                        <h3 class="card-title">Serei Gensouki</h3>
+                        <p class="card-text">Venha Ver esse epica historia</p>
+                    </div>
+                </div>
+            </a>
+          </div>
+    </div>
       </div>
   </div>
 
