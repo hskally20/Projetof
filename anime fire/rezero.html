@@ -89,43 +89,52 @@
                 </div>
             </div>
 
-            <div class="season-filter mt-4">
-            <label for="seasonFilter" class="form-label">Filtrar por Temporada</label>
-            <select class="form-select" id="seasonFilter" aria-label="Filtrar por Temporada">
-                <option selected>Selecione uma temporada</option>
-                <option value="1">Temporada 1</option>
-                <option value="2">Temporada 2</option>
-                <option value="3">Temporada 3</option>
-            </select>
-        </div>
+ <!-- Filtro de Temporada -->
+ <div class="season-filter">
+  <label for="seasonFilter" class="form-label">Filtrar por Temporada</label>
+  <select class="form-select" id="seasonFilter" aria-label="Filtrar por Temporada">
+      <option selected>Selecione uma temporada</option>
+      <option value="1">Temporada 1</option>
+      <option value="2">Temporada 2</option>
+      <option value="3">Temporada 3</option>
+  </select>
+</div>
 
-        <!-- Listagem de Episódios -->
-        <div class="container mt-4">
-            <h2>Episódios</h2>
-            <div class="list-group">
-                <a href="tela_anime.html?anime=rezero&episode=1" class="list-group-item list-group-item-action">
-                    <h5 class="mb-1">Episódio 1 - O Início do Poder</h5>
-                    <p class="mb-1">A história de Ryoma começa em seu novo mundo, enquanto ele explora suas habilidades mágicas e encontra novos amigos.</p>
-                    <small>Data de lançamento: 01/10/2024</small>
-                </a>
-                <a href="tela_anime.html?anime=rezero&episode=2" class="list-group-item list-group-item-action">
-                    <h5 class="mb-1">Episódio 2 - A Luta Pela Sobrevivência</h5>
-                    <p class="mb-1">Ryoma e seus amigos enfrentam um inimigo misterioso que ameaça a paz em sua nova casa.</p>
-                    <small>Data de lançamento: 08/10/2024</small>
-                </a>
-                <a href="tela_anime.html?anime=rezero&episode=3" class="list-group-item list-group-item-action">
-                    <h5 class="mb-1">Episódio 3 - O Poder Se Revela</h5>
-                    <p class="mb-1">Com uma batalha intensa, Ryoma descobre a verdadeira extensão de seus poderes e seus novos aliados.</p>
-                    <small>Data de lançamento: 15/10/2024</small>
-                </a>
-                <a href="tela_anime.html?anime=rezero&episode=4" class="list-group-item list-group-item-action">
-                    <h5 class="mb-1">Episódio 4 - A Decisão Final</h5>
-                    <p class="mb-1">Enquanto uma ameaça maior surge, Ryoma precisa fazer escolhas difíceis para proteger aqueles que ama.</p>
-                    <small>Data de lançamento: 22/10/2024</small>
-                </a>
-            </div>
-        </div>
-    </div>
+<!-- Listagem de Episódios -->
+<div class="mt-4">
+  <h2>Episódios</h2>
+  <div class="list-group">
+      <div class="episode season-1">
+          <a href="tela_anime.html?anime=rezero&episode=1" class="list-group-item list-group-item-action">
+              <h5 class="mb-1">Episódio 1 - O Início do Poder</h5>
+              <p class="mb-1">A história de Ryoma começa em seu novo mundo, enquanto ele explora suas habilidades mágicas e encontra novos amigos.</p>
+              <small>Data de lançamento: 01/10/2024</small>
+          </a>
+      </div>
+      <div class="episode season-1">
+          <a href="tela_anime.html?anime=rezero&episode=2" class="list-group-item list-group-item-action">
+              <h5 class="mb-1">Episódio 2 - A Luta Pela Sobrevivência</h5>
+              <p class="mb-1">Ryoma e seus amigos enfrentam um inimigo misterioso que ameaça a paz em sua nova casa.</p>
+              <small>Data de lançamento: 08/10/2024</small>
+          </a>
+      </div>
+      <div class="episode season-2">
+          <a href="tela_anime.html?anime=rezero&episode=3" class="list-group-item list-group-item-action">
+              <h5 class="mb-1">Episódio 3 - O Poder Se Revela</h5>
+              <p class="mb-1">Com uma batalha intensa, Ryoma descobre a verdadeira extensão de seus poderes e seus novos aliados.</p>
+              <small>Data de lançamento: 15/10/2024</small>
+          </a>
+      </div>
+      <div class="episode season-2">
+          <a href="tela_anime.html?anime=rezero&episode=4" class="list-group-item list-group-item-action">
+              <h5 class="mb-1">Episódio 4 - A Decisão Final</h5>
+              <p class="mb-1">Enquanto uma ameaça maior surge, Ryoma precisa fazer escolhas difíceis para proteger aqueles que ama.</p>
+              <small>Data de lançamento: 22/10/2024</small>
+          </a>
+      </div>
+  </div>
+</div>
+</div>
     <!-- Sugestões de Animes Similares -->
     <div class="container mt-4">
         <h2>Similares a Este</h2>
@@ -142,6 +151,32 @@
                     </div>
                 </a>
             </div>
+            <div class="col-md-4">
+              <a href="anime-dragon-ball-daima.html">
+                  <div class="anime-card">
+                      <img src="img/dragonball-novidades.webp" class="card-img-top" alt="Dragon Ball DAIMA">
+                      <div class="card-body">
+                          <h3 class="card-title">Dragon Ball DAIMA</h3>
+                          <p class="card-text">Relembrando a saga dos Saiyajins!</p>
+                      </div>
+                  </div>
+              </a>
+          </div>
+          <div class="col-md-4">
+            <a href="anime-seirei-gensouki.html">
+                <div class="anime-card">
+                    <img src="img/seireigensouki.webp" class="card-img-top" alt="Dragon Ball DAIMA">
+                    <div class="card-body">
+                        <h3 class="card-title">Serei Gensouki</h3>
+                        <p class="card-text">Venha Ver esse epica historia</p>
+                    </div>
+                </div>
+            </a>
+          </div>
+
+
+
+
         </div>
     </div>
 
