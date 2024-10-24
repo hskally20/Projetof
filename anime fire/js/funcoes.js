@@ -24,6 +24,8 @@ function closeGenreList() {
   overlay.style.display = 'none';  // Oculta o overlay
 }
 
+ 
+
 
   // Dados dos animes
   const animeData = {
@@ -297,6 +299,26 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+const seasonFilter = document.getElementById('seasonFilter');
+const episodes = document.querySelectorAll('.episode');
+
+seasonFilter.addEventListener('change', function() {
+    const selectedSeason = this.value;
+
+    // Esconde todos os episódios inicialmente
+    episodes.forEach(episode => {
+        episode.style.display = 'none';
+    });
+
+    // Mostra apenas os episódios da temporada selecionada
+    if (selectedSeason !== '') {
+        episodes.forEach(episode => {
+            if (episode.classList.contains(`season-${selectedSeason}`)) {
+                episode.style.display = 'block';
+            }
+        });
+    }
+});
 
   
   
