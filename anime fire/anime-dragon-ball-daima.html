@@ -84,11 +84,12 @@
     
 
     <!-- Filtro de Temporada -->
+    <!-- Listagem de Episódios -->
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <select class="form-select" aria-label="Filtro de Temporada">
-                    <option selected>Filtrar por Temporada</option>
+                <select class="form-select" id="seasonFilter" aria-label="Filtro de Temporada">
+                    <option selected value="">Filtrar por Temporada</option>
                     <option value="1">Temporada 1</option>
                     <option value="2">Temporada 2</option>
                     <option value="3">Temporada 3</option>
@@ -96,34 +97,55 @@
             </div>
         </div>
     </div>
-
-    <!-- Listagem de Episódios -->
-    <div class="container mt-4">
-        <h2>Episódios</h2>
-        <div class="list-group">
+    
+<!-- Listagem de Episódios -->
+<div class="container mt-4">
+    <h2>Episódios</h2>
+    <div class="list-group">
+        <div class="episode season-1">
             <a href="tela_anime.html?anime=dragon-ball-daima&episode=1" class="list-group-item list-group-item-action">
                 <h5 class="mb-1">Episódio 1 - O Retorno dos Saiyajins</h5>
                 <p class="mb-1">Após anos de paz, Goku e seus amigos devem enfrentar novos inimigos e rever velhos rostos da sua infância. O legado dos Saiyajins está mais vivo do que nunca!</p>
                 <small>Data de lançamento: 01/10/2024</small>
             </a>
+        </div>
+        <div class="episode season-1">
             <a href="tela_anime.html?anime=dragon-ball-daima&episode=2" class="list-group-item list-group-item-action">
                 <h5 class="mb-1">Episódio 2 - A Força do Super Saiyajin</h5>
                 <p class="mb-1">Goku treina arduamente para alcançar o novo nível de poder. Enquanto isso, novos rivais surgem no horizonte, buscando derrubar o herói.</p>
                 <small>Data de lançamento: 08/10/2024</small>
             </a>
+        </div>
+        <div class="episode season-1">
             <a href="tela_anime.html?anime=dragon-ball-daima&episode=3" class="list-group-item list-group-item-action">
                 <h5 class="mb-1">Episódio 3 - Confronto com Vegeta</h5>
                 <p class="mb-1">Goku e Vegeta se enfrentam em uma batalha épica. O destino do universo está em jogo e apenas o mais forte sairá vitorioso.</p>
                 <small>Data de lançamento: 15/10/2024</small>
             </a>
+        </div>
+        <div class="episode season-2">
             <a href="tela_anime.html?anime=dragon-ball-daima&episode=4" class="list-group-item list-group-item-action">
-                <h5 class="mb-1">Episódio 4 - O Poder dos Saiyajins</h5>
-                <p class="mb-1">Goku, Vegeta e seus aliados se unem para enfrentar uma ameaça desconhecida. No entanto, a verdadeira força dos Saiyajins está prestes a ser revelada.</p>
-                <small>Data de lançamento: 22/10/2024</small>
+                <h5 class="mb-1">Episódio 1 - O Retorno do Mal</h5>
+                <p class="mb-1">Uma nova ameaça surge, e os heróis devem se unir novamente.</p>
+                <small>Data de lançamento: 29/10/2024</small>
+            </a>
+        </div>
+        <div class="episode season-2">
+            <a href="tela_anime.html?anime=dragon-ball-daima&episode=5" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Episódio 2 - A Luta de Goku</h5>
+                <p class="mb-1">Goku enfrenta um adversário desconhecido.</p>
+                <small>Data de lançamento: 05/11/2024</small>
+            </a>
+        </div>
+        <div class="episode season-3">
+            <a href="tela_anime.html?anime=dragon-ball-daima&episode=6" class="list-group-item list-group-item-action">
+                <h5 class="mb-1">Episódio 1 - O Grande Torneio</h5>
+                <p class="mb-1">Os melhores lutadores se reúnem para um torneio épico.</p>
+                <small>Data de lançamento: 12/11/2024</small>
             </a>
         </div>
     </div>
-
+</div>
     <!-- Sugestões de Animes Similares -->
     <div class="container mt-4">
         <h2>Similares a Este</h2>
@@ -136,6 +158,19 @@
                         <div class="card-body">
                             <h3 class="card-title">Bleach: Sennen Kessen-hen</h3>
                             <p class="card-text">Últimos episódios da série!</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+
+            <div class="col-md-4">
+                <a href="anime-seirei-gensouki.html">
+                    <div class="anime-card">
+                        <img src="img/seireigensouki.webp" class="card-img-top" alt="Dragon Ball DAIMA">
+                        <div class="card-body">
+                            <h3 class="card-title">Serei Gensouki</h3>
+                            <p class="card-text">Venha Ver esse epica historia</p>
                         </div>
                     </div>
                 </a>
