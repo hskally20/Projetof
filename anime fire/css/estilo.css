@@ -8,6 +8,7 @@
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     color: #333;
+    text-decoration-color: #f4f4f4;
   }
   
   header {
@@ -410,6 +411,8 @@ color: red;
 font-weight: bold;
 }
 
+
+
 .close-btn {
 cursor: pointer;
 margin-top: 15px;
@@ -580,6 +583,7 @@ h1 {
   color: #fff;
 }
 
+
 /* Botões */
 .button {
   display: inline-block;
@@ -646,33 +650,37 @@ main {
   display: block;
 }
 
-/* Populares - estilização de listas */
 .populares-container {
-  background-color: #2c2c2c;
-  border: 1px solid #333;
-  border-radius: 8px;
+  background-color: #000000;
   padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 100%;  /* Adicionando altura para manter o tamanho */
+  max-height: 350px; /* Limita a altura máxima da lista */
+  overflow-y: auto; /* Adiciona rolagem se necessário */
 }
 
+/* Estilo para os itens da lista */
 .populares-list {
-  padding-left: 0;
-  list-style: none;
-  counter-reset: ranked;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
 }
 
+/* Ajuste para os itens da lista */
 .populares-list li {
-  font-size: 1.3em;
-  margin: 10px 0;
   padding: 10px;
   background-color: #1e1e1e;
   border-radius: 5px;
   counter-increment: ranked;
   position: relative;
   padding-left: 40px;
-  color: #fff;
+  color: #ffffff;
+  margin-bottom: 10px; /* Espaço entre os itens */
+  font-size: 1.1rem;
 }
 
+/* Contador ao lado de cada item */
 .populares-list li:before {
   content: counter(ranked);
   position: absolute;
@@ -682,17 +690,12 @@ main {
   background-color: #e74c3c;
   color: white;
   font-weight: bold;
-  font-size: 1.2em;
   width: 30px;
   height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-}
-
-.populares-list li strong {
-  color: #e74c3c;
 }
 
 /* Rodapé */

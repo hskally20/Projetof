@@ -45,7 +45,6 @@
     <div class="navbar">
       <a href="animefire.html" class="navbar-link">Início</a>
       <a class="nav-link" href="#" id="genreToggle" onclick="toggleGenreList()">Gêneros</a>
-      <a href="populares.html" class="navbar-link">Populares</a>
       <a href="calendario.html" class="navbar-link">Calendário de Lançamentos</a>
       <a href="novidadades.html" class="navbar-link">Novidades</a>
     </div>
@@ -69,39 +68,80 @@
       </ul>
       <button class="close-btn" onclick="closeGenreList()">Fechar</button>
     </div>
+    <div class="overlay">
+     <div class="container">
+       <titlle> animes populares </titlle>
+       <ul>
+        <li>Ação</li>
+        <li>Aventura</li>
+        <li>Comédia</li>
+        <li>Drama</li>
+        <li>Fantasia</li>
+        <li>Romance</li>
+        <li>Ficção Científica</li>
+        <li>Shounen</li>
+        <li>Shoujo</li>
+        <li>Sobrenatural</li>
+      </ul>
+     </div>
+    </div>
   </div>
 
-  <!-- Carousel -->
-  <section class="carousel-container">
-    <h2 class="text-center mt-4">Lançamentos</h2>
-    <div id="animeCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
-        <div class="carousel-inner">
+  <!-- Layout com o carrossel à esquerda e a lista à direita -->
+  <section class="container my-5">
+    <div class="row">
+      <!-- Carrossel (lado esquerdo) -->
+      <div class="col-md-6">
+        <h2 class="text-center mb-4">Lançamentos</h2>
+        <div id="animeCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+          <div class="carousel-inner">
             <div class="carousel-item active">
-             <div class="alinhar">
-                <img src="img/anime_3.webp">
-             </div>  
-            </div>
-            <div class="carousel-item">
-              <div class="alinhar"></div>
-                <img src="img/dragonball-novidades.webp">
-                </div>
+              <div class="alinhar">
+                <img src="img/anime_3.webp" class="d-block w-100">
+              </div>  
             </div>
             <div class="carousel-item">
               <div class="alinhar">
-                <img src="img/anime_1.webp">
+                <img src="img/dragonball-novidades.webp" class="d-block w-100">
               </div>
             </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#animeCarousel" data-bs-slide="prev">
+            <div class="carousel-item">
+              <div class="alinhar">
+                <img src="img/anime_1.webp" class="d-block w-100">
+              </div>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#animeCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#animeCarousel" data-bs-slide="next">
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#animeCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
-        </button>
+          </button>
+        </div>
+      </div>
+
+      <!-- Lista de Animes Populares (lado direito) -->
+      <div class="col-md-6">
+        <h2 class="text-center mb-4">Animes Populares</h2>
+        <section class="populares-container">
+          <ol class="populares-list">
+            <li><strong> - Attack on Titan</strong></li>
+            <li><strong> - Demon Slayer</strong></li>
+            <li><strong> - One Piece</strong></li>
+            <li><strong> - Jujutsu Kaisen</strong></li>
+            <li><strong> - My Hero Academia</strong></li>
+            <li><strong> - Tokyo Revengers</strong></li>
+            <li><strong> - Sword Art Online</strong></li>
+            <li><strong> - Hunter x Hunter</strong></li>
+            <li><strong> - Black Clover</strong></li>
+            <li><strong> - Fullmetal Alchemist: Brotherhood</strong></li>
+          </ol>
+        </section>
+      </div>
     </div>
-</section>
+  </section>
   
   <!-- Lista de animes -->
   <section class="anime-list d-flex justify-content-around flex-wrap">
@@ -144,15 +184,130 @@
         </div>
       </a>
     </div>
-  </section>
+  </section> 
   
- 
- 
-  <!-- Scripts do Bootstrap (JS e dependências Popper.js) -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <div class="container mt-5">
+    <!-- Container para os animes -->
+    <div id="anime-container" class="row mt-4"></div>
+
+    <!-- Paginação -->
+    <nav id="pagination" aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center"></ul>
+    </nav>
+</div>
   
-  <!-- Script personalizado -->
-  <script src="js/funcoes.js"></script>
+  <footer class="bg-dark text-light py-3 mt-4">
+    <div class="container text-center">
+        <p>&copy; 2023 Anime Fire. Todos os direitos reservados.</p>
+    </div>
+</footer>
+<script>
+  let currentPage = 1;
+  const animesPerPage = 10;
+  let allAnimes = [];
+  let filteredAnimes = [];
+
+  // Função para carregar os animes
+  async function loadAnimes() {
+      try {
+          // URL corrigida da API Jikan
+          const url = `https://api.jikan.moe/v4/anime?page=${currentPage}&limit=${animesPerPage}`;
+          
+          const response = await fetch(url);
+
+          // Verifica se a resposta foi bem-sucedida
+          if (!response.ok) {
+              throw new Error(`Erro na requisição: ${response.statusText}`);
+          }
+
+          // Log para verificar a resposta completa da API
+          const data = await response.json();
+          console.log("Resposta da API:", data);
+
+          // Verifica se a chave 'data' existe na resposta
+          if (data && data.data) {
+              allAnimes = data.data;
+              filteredAnimes = data.data;
+              renderAnimes();  // Renderiza os animes
+              renderPagination();  // Renderiza a paginação
+          } else {
+              throw new Error('Dados não encontrados na resposta da API.');
+          }
+      } catch (error) {
+          console.error('Erro ao buscar os animes:', error);
+          alert('Não foi possível carregar os animes. Veja o console para mais detalhes.');
+      }
+  }
+
+  // Função para renderizar os animes na tela com o formato desejado
+  function renderAnimes() {
+      const animeContainer = document.getElementById('anime-container');
+      if (!animeContainer) {
+          console.error('Elemento #anime-container não encontrado');
+          return;
+      }
+
+      animeContainer.innerHTML = ''; // Limpa o container anterior
+
+      if (filteredAnimes && filteredAnimes.length > 0) {
+          const start = (currentPage - 1) * animesPerPage;
+          const end = start + animesPerPage;
+          const animesToDisplay = filteredAnimes.slice(start, end);
+
+          animesToDisplay.forEach(anime => {
+              const card = document.createElement('div');
+              card.className = 'col-md-4 mb-4';
+              card.innerHTML = `
+                  <div class="anime-card">
+                      <a href="${anime.url}" class="card">
+                          <img src="${anime.images.jpg.image_url}" class="card-img-top anime-img" alt="${anime.title}">
+                          <div class="card-body">
+                              <h5 class="card-title">${anime.title}</h5>
+                              <p class="card-text">Novos episódios disponíveis!</p>
+                          </div>
+                      </a>
+                  </div>
+              `;
+              animeContainer.appendChild(card);
+          });
+
+          if (animesToDisplay.length === 0) {
+              animeContainer.innerHTML = '<p class="text-center">Nenhum anime encontrado.</p>';
+          }
+      } else {
+          animeContainer.innerHTML = '<p class="text-center">Nenhum anime disponível.</p>';
+      }
+  }
+
+  // Função para renderizar a paginação
+  function renderPagination() {
+      const paginationElement = document.getElementById('pagination').querySelector('.pagination');
+      paginationElement.innerHTML = ''; // Limpa a paginação anterior
+
+      const pageCount = Math.ceil(filteredAnimes.length / animesPerPage);
+      for (let i = 1; i <= pageCount; i++) {
+          const pageItem = document.createElement('li');
+          pageItem.className = 'page-item' + (i === currentPage ? ' active' : '');
+          pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+          pageItem.querySelector('a').addEventListener('click', (event) => {
+              event.preventDefault();
+              currentPage = i;
+              renderAnimes();
+              renderPagination();
+          });
+          paginationElement.appendChild(pageItem);
+      }
+  }
+
+  // Asegura que o DOM está completamente carregado antes de rodar o script
+  document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM completamente carregado');
+      loadAnimes();  // Carrega os animes
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+<script src="js/funcoes.js"></script>
+
 </body>
 </html>

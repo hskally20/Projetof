@@ -319,6 +319,3 @@ seasonFilter.addEventListener('change', function() {
         });
     }
 });
-
-  
-  
