@@ -12,25 +12,193 @@
   <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-
   <!-- Header -->
   <header>
+    <!-- Logo -->
     <div class="logo">
       <img src="img/teste3.png" alt="Logo Anime Fire" class="logo-img">
     </div>
+
+    <!-- Barra de pesquisa e ícone de usuário -->
+    <div class="d-flex align-items-center">
+      <form action="resultados.html" method="GET" class="d-flex">
+        <input type="text" class="form-control" name="query" placeholder="Pesquisar...">
+        <button type="submit" class="btn btn-danger">Pesquisar</button> <!-- Botão vermelho -->
+      </form>
+      <a href="login.html" class="user-icon">
+        <i class="bi bi-person-circle"></i>
+      </a>
+    </div>
   </header>
 
-  <!-- Lista de Episódios -->
-  <section class="container my-5">
-    <h2 class="text-center mb-4" id="animeTitle">Carregando...</h2>
-    <div id="episodeList" class="list-group">
-      <!-- Episódios serão exibidos aqui -->
+  <!-- Menu de navegação -->
+  <nav class="navbar-container">
+    <div class="navbar">
+      <a href="animefire.html" class="navbar-link">Início</a>
+      <a class="nav-link" href="#" id="genreToggle" onclick="toggleGenreList()">Gêneros</a>
+      <a href="calendario.html" class="navbar-link">Calendário de Lançamentos</a>
+      <a href="novidadades.html" class="navbar-link">Novidades</a>
     </div>
-  </section>
+  </nav>
 
-  <!-- Scripts do Bootstrap (JS e dependências Popper.js) -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+  <!-- Overlay de gêneros -->
+  <div class="overlay" id="genreOverlay">
+    <div class="genre-list">
+      <h3>Gêneros</h3>
+      <ul>
+        <li>Ação</li>
+        <li>Aventura</li>
+        <li>Comédia</li>
+        <li>Drama</li>
+        <li>Fantasia</li>
+        <li>Romance</li>
+        <li>Ficção Científica</li>
+        <li>Shounen</li>
+        <li>Shoujo</li>
+        <li>Sobrenatural</li>
+      </ul>
+      <button class="close-btn" onclick="closeGenreList()">Fechar</button>
+    </div>
+  </div>
+   <!-- Container para os Animes -->
+   <div id="anime-container" class="container mt-4">
+    <h2 id="anime-title"></h2>
+    <div class="row">
+      <div class="col-md-6">
+        <img id="anime-image" style="max-width: 100%;" alt="Imagem do Anime" class="card-img-top img-fluid">
+      </div>
+      <div class="col-md-6">
+        <p id="anime-description" class="lead text-white"></p>
+      </div>
+    </div>
+  </div>
 
+  <!-- Detalhes do Anime e Episódios -->
+  <div id="anime-details" class="mt-5"></div>
+</div>
+
+<footer class="bg-dark text-light py-3 mt-4">
+  <div class="container text-center">
+    <p>&copy; 2023 Anime Fire. Todos os direitos reservados.</p>
+  </div>
+</footer>
+
+<script>
+  let currentPage = 1;
+  const animesPerPage = 4;
+  let allAnimes = [];
+  let filteredAnimes = [];
+
+  // Função para carregar os animes
+  async function loadAnimes() {
+    try {
+      const url = `https://api.jikan.moe/v4/anime?page=${currentPage}&limit=${animesPerPage}`;
+      const response = await fetch(url);
+      if (!response.ok) throw new Error(`Erro: ${response.statusText}`);
+
+      const data = await response.json();
+      if (data && data.data) {
+        allAnimes = data.data;
+        filteredAnimes = data.data;
+        renderAnimes();  // Renderiza os animes
+        renderPagination();  // Renderiza a paginação
+      }
+    } catch (error) {
+      console.error('Erro ao carregar os animes:', error);
+      alert('Não foi possível carregar os animes.');
+    }
+  }
+
+  // Função para renderizar os animes na tela
+  function renderAnimes() {
+    const animeContainer = document.getElementById('anime-container');
+    animeContainer.innerHTML = '';  // Limpa o conteúdo anterior
+
+    filteredAnimes.forEach(anime => {
+      const card = document.createElement('div');
+      card.className = 'col-md-3 mb-4'; // Card ocupa 3 colunas para 4 por linha
+      card.innerHTML = `
+        <div class="anime-card">
+          <a href="#" class="card" onclick="loadAnimeDetails(${anime.mal_id})">
+            <img src="${anime.images.jpg.image_url}" class="card-img-top anime-img" alt="${anime.title}">
+            <div class="card-body">
+              <h5 class="card-title">${anime.title}</h5>
+              <p class="card-text">Novos episódios disponíveis!</p>
+            </div>
+          </a>
+        </div>
+      `;
+      animeContainer.appendChild(card);
+    });
+  }
+
+  // Função para renderizar a paginação
+  function renderPagination() {
+    const paginationElement = document.getElementById('pagination').querySelector('.pagination');
+    paginationElement.innerHTML = '';
+
+    const pageCount = Math.ceil(filteredAnimes.length / animesPerPage);
+    for (let i = 1; i <= pageCount; i++) {
+      const pageItem = document.createElement('li');
+      pageItem.className = `page-item${i === currentPage ? ' active' : ''}`;
+      pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+      pageItem.querySelector('a').addEventListener('click', (event) => {
+        event.preventDefault();
+        currentPage = i;
+        loadAnimes();
+      });
+      paginationElement.appendChild(pageItem);
+    }
+  }
+
+  // Função para carregar detalhes do anime e episódios
+  async function loadAnimeDetails(animeId) {
+    try {
+      const animeUrl = `https://api.jikan.moe/v4/anime/${animeId}`;
+      const episodesUrl = `https://api.jikan.moe/v4/anime/${animeId}/episodes`;
+
+      const [animeResponse, episodesResponse] = await Promise.all([
+        fetch(animeUrl),
+        fetch(episodesUrl)
+      ]);
+
+      const animeData = await animeResponse.json();
+      const episodesData = await episodesResponse.json();
+
+      // Renderizar detalhes do anime
+      const animeDetailsContainer = document.getElementById('anime-details');
+      animeDetailsContainer.innerHTML = `
+        <div class="card">
+          <img src="${animeData.data.images.jpg.large_image_url}" class="card-img-top" alt="${animeData.data.title}">
+          <div class="card-body">
+            <h5 class="card-title">${animeData.data.title}</h5>
+            <p class="card-text">${animeData.data.synopsis}</p>
+          </div>
+        </div>
+        <h3 class="mt-4">Episódios</h3>
+        <ul class="list-group" id="episode-list"></ul>
+      `;
+
+      // Renderizar episódios
+      const episodeList = document.getElementById('episode-list');
+      episodesData.data.forEach(episode => {
+        const episodeItem = document.createElement('li');
+        episodeItem.className = 'list-group-item';
+        episodeItem.innerHTML = `
+          <strong>Ep. ${episode.episode}</strong>: ${episode.title}
+          <a href="${episode.url}" class="btn btn-sm btn-primary float-end" target="_blank">Assistir</a>
+        `;
+        episodeList.appendChild(episodeItem);
+      });
+    } catch (error) {
+      console.error('Erro ao carregar os detalhes do anime:', error);
+      alert('Não foi possível carregar os detalhes do anime.');
+    }
+  }
+
+  // Carregar animes assim que a página for carregada
+  document.addEventListener('DOMContentLoaded', loadAnimes);
+</script>
 </body>
 </html>
+
