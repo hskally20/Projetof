@@ -186,7 +186,7 @@
     </div>
   </section> 
   
-  <div class="container mt-5">
+ 
     <!-- Container para os animes -->
     <div id="anime-container" class="row mt-4"></div>
 
@@ -194,7 +194,7 @@
     <nav id="pagination" aria-label="Page navigation" class="mt-4">
         <ul class="pagination justify-content-center"></ul>
     </nav>
-</div>
+
   
   <footer class="bg-dark text-light py-3 mt-4">
     <div class="container text-center">
@@ -202,108 +202,104 @@
     </div>
 </footer>
 <script>
-  let currentPage = 1;
-  const animesPerPage = 10;
-  let allAnimes = [];
-  let filteredAnimes = [];
+ let currentPage = 1;
+const animesPerPage = 4;  // Alterando para 4 por fileira
+let allAnimes = [];
+let filteredAnimes = [];
 
-  // Função para carregar os animes
-  async function loadAnimes() {
-      try {
-          // URL corrigida da API Jikan
-          const url = `https://api.jikan.moe/v4/anime?page=${currentPage}&limit=${animesPerPage}`;
-          
-          const response = await fetch(url);
+// Função para carregar os animes
+async function loadAnimes() {
+  try {
+    // URL corrigida da API Jikan
+    const url = `https://api.jikan.moe/v4/anime?page=${currentPage}&limit=${animesPerPage}`;
+    
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Erro na requisição: ${response.statusText}`);
+    }
 
-          // Verifica se a resposta foi bem-sucedida
-          if (!response.ok) {
-              throw new Error(`Erro na requisição: ${response.statusText}`);
-          }
+    const data = await response.json();
+    console.log("Resposta da API:", data);
 
-          // Log para verificar a resposta completa da API
-          const data = await response.json();
-          console.log("Resposta da API:", data);
+    if (data && data.data) {
+      allAnimes = data.data;
+      filteredAnimes = data.data;
+      renderAnimes();  // Renderiza os animes
+      renderPagination();  // Renderiza a paginação
+    } else {
+      throw new Error('Dados não encontrados na resposta da API.');
+    }
+  } catch (error) {
+    console.error('Erro ao buscar os animes:', error);
+    alert('Não foi possível carregar os animes. Veja o console para mais detalhes.');
+  }
+}
 
-          // Verifica se a chave 'data' existe na resposta
-          if (data && data.data) {
-              allAnimes = data.data;
-              filteredAnimes = data.data;
-              renderAnimes();  // Renderiza os animes
-              renderPagination();  // Renderiza a paginação
-          } else {
-              throw new Error('Dados não encontrados na resposta da API.');
-          }
-      } catch (error) {
-          console.error('Erro ao buscar os animes:', error);
-          alert('Não foi possível carregar os animes. Veja o console para mais detalhes.');
-      }
+// Função para renderizar os animes na tela com o formato desejado
+function renderAnimes() {
+  const animeContainer = document.getElementById('anime-container');
+  if (!animeContainer) {
+    console.error('Elemento #anime-container não encontrado');
+    return;
   }
 
-  // Função para renderizar os animes na tela com o formato desejado
-  function renderAnimes() {
-      const animeContainer = document.getElementById('anime-container');
-      if (!animeContainer) {
-          console.error('Elemento #anime-container não encontrado');
-          return;
-      }
+  animeContainer.innerHTML = '';  // Limpa o container anterior
 
-      animeContainer.innerHTML = ''; // Limpa o container anterior
+  if (filteredAnimes && filteredAnimes.length > 0) {
+    const start = (currentPage - 1) * animesPerPage;
+    const end = start + animesPerPage;
+    const animesToDisplay = filteredAnimes.slice(start, end);
 
-      if (filteredAnimes && filteredAnimes.length > 0) {
-          const start = (currentPage - 1) * animesPerPage;
-          const end = start + animesPerPage;
-          const animesToDisplay = filteredAnimes.slice(start, end);
+    animesToDisplay.forEach(anime => {
+      const card = document.createElement('div');
+      card.className = 'col-md-3 mb-4'; // Cada card ocupará 3 colunas (para 4 itens por fileira)
+      card.innerHTML = `
+        <div class="anime-card">
+          <a href="lista-ep.html" class="card" onclick="loadAnimeDetails(${anime.mal_id})">
+            <img src="${anime.images.jpg.image_url}" class="card-img-top anime-img" alt="${anime.title}">
+            <div class="card-content">
+              <h5 class="card-title">${anime.title}</h5>
+              <p class="card-text">Novos episódios disponíveis!</p>
+            </div>
+          </a>
+        </div>
+      `;
+      animeContainer.appendChild(card);
+    });
 
-          animesToDisplay.forEach(anime => {
-              const card = document.createElement('div');
-              card.className = 'col-md-4 mb-4';
-              card.innerHTML = `
-                  <div class="anime-card">
-                      <a href="${anime.url}" class="card">
-                          <img src="${anime.images.jpg.image_url}" class="card-img-top anime-img" alt="${anime.title}">
-                          <div class="card-body">
-                              <h5 class="card-title">${anime.title}</h5>
-                              <p class="card-text">Novos episódios disponíveis!</p>
-                          </div>
-                      </a>
-                  </div>
-              `;
-              animeContainer.appendChild(card);
-          });
-
-          if (animesToDisplay.length === 0) {
-              animeContainer.innerHTML = '<p class="text-center">Nenhum anime encontrado.</p>';
-          }
-      } else {
-          animeContainer.innerHTML = '<p class="text-center">Nenhum anime disponível.</p>';
-      }
+    if (animesToDisplay.length === 0) {
+      animeContainer.innerHTML = '<p class="text-center">Nenhum anime encontrado.</p>';
+    }
+  } else {
+    animeContainer.innerHTML = '<p class="text-center">Nenhum anime disponível.</p>';
   }
+}
 
-  // Função para renderizar a paginação
-  function renderPagination() {
-      const paginationElement = document.getElementById('pagination').querySelector('.pagination');
-      paginationElement.innerHTML = ''; // Limpa a paginação anterior
+// Função para renderizar a paginação
+function renderPagination() {
+  const paginationElement = document.getElementById('pagination').querySelector('.pagination');
+  paginationElement.innerHTML = '';  // Limpa a paginação anterior
 
-      const pageCount = Math.ceil(filteredAnimes.length / animesPerPage);
-      for (let i = 1; i <= pageCount; i++) {
-          const pageItem = document.createElement('li');
-          pageItem.className = 'page-item' + (i === currentPage ? ' active' : '');
-          pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-          pageItem.querySelector('a').addEventListener('click', (event) => {
-              event.preventDefault();
-              currentPage = i;
-              renderAnimes();
-              renderPagination();
-          });
-          paginationElement.appendChild(pageItem);
-      }
+  const pageCount = Math.ceil(filteredAnimes.length / animesPerPage);
+  for (let i = 1; i <= pageCount; i++) {
+    const pageItem = document.createElement('li');
+    pageItem.className = 'page-item' + (i === currentPage ? ' active' : '');
+    pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+    pageItem.querySelector('a').addEventListener('click', (event) => {
+      event.preventDefault();
+      currentPage = i;
+      renderAnimes();
+      renderPagination();
+    });
+    paginationElement.appendChild(pageItem);
   }
+}
 
-  // Asegura que o DOM está completamente carregado antes de rodar o script
-  document.addEventListener('DOMContentLoaded', () => {
-      console.log('DOM completamente carregado');
-      loadAnimes();  // Carrega os animes
-  });
+// Asegura que o DOM está completamente carregado antes de rodar o script
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('DOM completamente carregado');
+  loadAnimes();  // Carrega os animes
+});
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
