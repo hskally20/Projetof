@@ -804,3 +804,43 @@ footer {
 .episode {
   display: none; /* Esconde todos os episódios inicialmente */
 }
+/* Estilos da paginação */
+.pagination {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.pagination .page-item {
+  margin: 0 5px;
+}
+
+.pagination .page-link {
+  color: #ffffff; /* Texto branco */
+  background-color: #ff0000; /* Fundo vermelho */
+  border: 1px solid #ff0000;
+  border-radius: 5px;
+  padding: 8px 12px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.pagination .page-link:hover {
+  background-color: #cc0000; /* Tom mais escuro de vermelho ao passar o mouse */
+  color: #ffffff; /* Mantém o texto em branco */
+}
+
+.pagination .page-item.active .page-link {
+  background-color: #ff0000; /* Fundo vermelho para a página ativa */
+  color: #ffffff; /* Texto branco para a página ativa */
+  font-weight: bold;
+  pointer-events: none; /* Desativa clique na página ativa */
+}
+
+.pagination .page-item.disabled .page-link {
+  background-color: #e0e0e0; /* Cor de fundo cinza para itens desativados */
+  color: #a0a0a0; /* Cor do texto cinza claro para itens desativados */
+  pointer-events: none; /* Desativa clique nos itens desativados */
+}

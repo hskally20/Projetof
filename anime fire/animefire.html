@@ -184,38 +184,42 @@
     </div>
 </footer>
 <script>
-let currentPage = 1;
-const animesPerPage = 8;  // Alterando para 4 por fileira
+let currentPage = 2;
+const animesPerPage = 25;  // Alterando para 4 por fileira
 let allAnimes = [];
 let filteredAnimes = [];
 
-// Função para carregar os animes
+// Função para carregar os animes da página atual
 async function loadAnimes() {
+  const url = `https://api.jikan.moe/v4/anime?page=${currentPage}&limit=${animesPerPage}`;
+
   try {
-    // URL corrigida da API Jikan
-    const url = `https://api.jikan.moe/v4/anime?page=${currentPage}&limit=${animesPerPage}`;
-    
     const response = await fetch(url);
+    
+    // Verifica se a resposta foi bem-sucedida
     if (!response.ok) {
-      throw new Error(`Erro na requisição: ${response.statusText}`);
+      throw new Error(`Erro na requisição: ${response.statusText} (status: ${response.status})`);
     }
 
     const data = await response.json();
     console.log("Resposta da API:", data);
 
+    // Verifica se os dados estão presentes
     if (data && data.data) {
       allAnimes = data.data;
       filteredAnimes = data.data;
-      renderAnimes();  // Renderiza os animes
-      renderPagination();  // Renderiza a paginação
+      renderAnimes();         // Renderiza os animes carregados
+      renderPagination();      // Renderiza a paginação
     } else {
-      throw new Error('Dados não encontrados na resposta da API.');
+      throw new Error('Nenhum dado encontrado na resposta da API.');
     }
+
   } catch (error) {
     console.error('Erro ao buscar os animes:', error);
-    alert('Não foi possível carregar os animes. Veja o console para mais detalhes.');
+    alert('Não foi possível carregar os animes. Por favor, verifique o console para mais detalhes.');
   }
 }
+
 
 // Função para renderizar os animes na tela com o formato desejado
 function renderAnimes() {
@@ -258,24 +262,45 @@ function renderAnimes() {
   }
 }
     // Função para renderizar a paginação
-    function renderPagination() {
-            const paginationElement = document.getElementById('pagination').querySelector('.pagination');
-            paginationElement.innerHTML = ''; // Limpa a paginação anterior
+ // Função para renderizar a paginação com botões de "Anterior", número da página atual e "Próximo"
+function renderPagination() {
+  const paginationElement = document.getElementById('pagination').querySelector('.pagination');
+  paginationElement.innerHTML = ''; // Limpa a paginação anterior
 
-            const pageCount = Math.ceil(filteredPokemons.length / pokemonsPerPage);
-            for (let i = 1; i <= pageCount; i++) {
-                const pageItem = document.createElement('li');
-                pageItem.className = 'page-item' + (i === currentPage ? ' active' : '');
-                pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-                pageItem.querySelector('a').addEventListener('click', (event) => {
-                    event.preventDefault();
-                    currentPage = i;
-                    renderPokemons();
-                    renderPagination();
-                });
-                paginationElement.appendChild(pageItem);
-            }
-        }
+  const pageCount = Math.ceil(1000 / animesPerPage); // 1000 é um número de exemplo; ajuste conforme o total de animes da API
+
+  // Botão "Anterior"
+  const prevItem = document.createElement('li');
+  prevItem.className = 'page-item' + (currentPage === 1 ? ' disabled' : '');
+  prevItem.innerHTML = `<a class="page-link" href="#">Anterior</a>`;
+  prevItem.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (currentPage > 1) {
+      currentPage--;
+      loadAnimes();
+    }
+  });
+  paginationElement.appendChild(prevItem);
+
+  // Número da página atual
+  const pageItem = document.createElement('li');
+  pageItem.className = 'page-item active';
+  pageItem.innerHTML = `<a class="page-link" href="#">${currentPage}</a>`;
+  paginationElement.appendChild(pageItem);
+
+  // Botão "Próximo"
+  const nextItem = document.createElement('li');
+  nextItem.className = 'page-item' + (currentPage === pageCount ? ' disabled' : '');
+  nextItem.innerHTML = `<a class="page-link" href="#">Próximo</a>`;
+  nextItem.addEventListener('click', (event) => {
+    event.preventDefault();
+    if (currentPage < pageCount) {
+      currentPage++;
+      loadAnimes();
+    }
+  });
+  paginationElement.appendChild(nextItem);
+}
 
 // Asegura que o DOM está completamente carregado antes de rodar o script
 document.addEventListener('DOMContentLoaded', () => {
