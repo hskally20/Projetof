@@ -202,8 +202,8 @@
     </div>
 </footer>
 <script>
- let currentPage = 1;
-const animesPerPage = 4;  // Alterando para 4 por fileira
+let currentPage = 1;
+const animesPerPage = 8;  // Alterando para 4 por fileira
 let allAnimes = [];
 let filteredAnimes = [];
 
@@ -255,7 +255,8 @@ function renderAnimes() {
       card.className = 'col-md-3 mb-4'; // Cada card ocupará 3 colunas (para 4 itens por fileira)
       card.innerHTML = `
         <div class="anime-card">
-          <a href="lista-ep.html" class="card" onclick="loadAnimeDetails(${anime.mal_id})">
+          <!-- Passa o anime.mal_id como parâmetro na URL para lista-ep.html -->
+          <a href="lista-ep.html?id=${anime.mal_id}" class="card">
             <img src="${anime.images.jpg.image_url}" class="card-img-top anime-img" alt="${anime.title}">
             <div class="card-content">
               <h5 class="card-title">${anime.title}</h5>
@@ -274,7 +275,6 @@ function renderAnimes() {
     animeContainer.innerHTML = '<p class="text-center">Nenhum anime disponível.</p>';
   }
 }
-
 // Função para renderizar a paginação
 function renderPagination() {
   const paginationElement = document.getElementById('pagination').querySelector('.pagination');
