@@ -125,8 +125,8 @@ async function loadAnimeDetails() {
       const episodeItem = document.createElement('li');
       episodeItem.className = 'list-group-item';
       episodeItem.innerHTML = `
-        <strong>Ep. ${episode.episode}</strong>: ${episode.title}
-        <a href="${episode.url}" class="btn btn-sm btn-primary float-end" target="_blank">Assistir</a>
+        <strong>Ep. ${episode.mal_id}</strong>: ${episode.title}
+        <a href="tela_anime.html?id=${animeId}&episode=${episode.mal_id}" class="btn btn-sm btn-primary float-end">Assistir</a>
       `;
       episodeList.appendChild(episodeItem);
     });
@@ -138,8 +138,8 @@ async function loadAnimeDetails() {
 
 // Carregar os detalhes do anime quando a página for carregada
 document.addEventListener('DOMContentLoaded', loadAnimeDetails);
-
 </script>
+<script src="js/funcoes.js"></script>
 </body>
 </html>
 

@@ -1,117 +1,173 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anime Player - Episódios</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Player - Episódio</title>
 
-    <!-- Link para o CSS do Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Link para o CSS personalizado -->
-    <link rel="stylesheet" href="css/estilo.css">
+  <!-- Link para o CSS do Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css">
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <!-- Logo -->
-    <div class="logo">
-      <img src="img/teste3.png" alt="Logo Anime Fire" class="logo-img">
-    </div>
 
-    <!-- Barra de pesquisa e ícone de usuário -->
-    <div class="d-flex align-items-center">
-      <form action="resultados.html" method="GET" class="d-flex">
-        <input type="text" class="form-control" name="query" placeholder="Pesquisar...">
-        <button type="submit" class="btn btn-danger">Pesquisar</button> <!-- Botão vermelho -->
-      </form>
-      <!-- Ícone de usuário que redireciona para login/registro -->
-      <a href="login.html" class="user-icon">
-        <i class="bi bi-person-circle"></i> <!-- Ícone de usuário do Bootstrap -->
-      </a>
-    </div>
-  </header>
-
-  <!-- Cabeçalho -->
-  <nav class="navbar-container">
-    <div class="navbar">
-      <a href="animefire.html" class="navbar-link">Início</a>
-      <a class="nav-link" href="#" id="genreToggle" onclick="toggleGenreList()">Gêneros</a>
-    
-      <a href="calendario.html" class="navbar-link">Calendário de Lançamentos</a>
-      <a href="novidadades.html" class="navbar-link">Novidades</a>
-    </div>
-  </nav>
-   <!-- Overlay de gêneros -->
-  <div class="overlay" id="genreOverlay">
-    <div class="genre-list">
-      <h3>Gêneros</h3>
-      <ul>
-        <li>Ação</li>
-        <li>Aventura</li>
-        <li>Comédia</li>
-        <li>Drama</li>
-        <li>Fantasia</li>
-        <li>Romance</li>
-        <li>Ficção Científica</li>
-        <li>Shounen</li>
-        <li>Shoujo</li>
-        <li>Sobrenatural</li>
-      </ul>
-      <button class="close-btn" onclick="closeGenreList()">Fechar</button>
-    </div>
-  </div>
-  <!-- Conteúdo Principal -->
-  <div class="main-content container">
-    
-    <!-- Título do Anime e Episódio -->
-    <div id="anime-title" class="text-center mt-4">
-      <h1 id="anime-name" class="text-white"></h1>
-      <h2 id="episode-title" class="text-white"></h2>
-    </div>
-
-    <!-- Quadro de Reprodução e Resumo -->
-    <div class="row">
-      <!-- Quadro de Reprodução -->
-      <div class="col-md-8">
-        <div class="video-container mb-3">
-          <div class="video-frame" id="video-frame" style="background-color: #000; height: 450px;">
-            <!-- O player do episódio será carregado aqui -->
-          </div>
-        </div>
-        <div class="d-flex justify-content-between mb-3">
-          <button class="btn btn-danger" id="prevEpisode">Episódio Anterior</button>
-          <button class="btn btn-danger" id="episodeList">Lista de Episódios</button>
-          <button class="btn btn-danger" id="nextEpisode">Próximo Episódio</button>
-        </div>
-      </div>
-
-      <!-- Resumo do Episódio -->
-      <div class="col-md-4">
-        <div class="episode-summary p-3" id="episode-summary" style="background-color: #222; color: white; border-radius: 10px;">
-          <h3>Resumo do Episódio</h3>
-          <p id="episode-description">Descrição do episódio será carregada aqui.</p>
-          <p id="episode-release-date">Data de lançamento será carregada aqui.</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Seção de Comentários -->
-    <div class="comments-section">
-      <input type="text" class="form-control comment-input mb-2" placeholder="Deixe um comentário...">
-      <button class="btn btn-danger comment-button mb-3">Enviar Comentário</button>
-      <div class="comments-list">
-        <!-- Aqui aparecerão os comentários -->
-        <div class="comment">Comentário 1</div>
-        <div class="comment">Comentário 2</div>
-      </div>
-    </div>
-
+<!-- Header -->
+<header>
+  <div class="logo">
+    <img src="img/teste3.png" alt="Logo Anime Fire" class="logo-img">
   </div>
 
-  <!-- JavaScript com JSON Embutido -->
- 
-  <script src="js/funcoes.js"></script>
-  
+  <div class="d-flex align-items-center">
+    <form action="resultados.html" method="GET" class="d-flex">
+      <input type="text" class="form-control" name="query" placeholder="Pesquisar...">
+      <button type="submit" class="btn btn-danger">Pesquisar</button>
+    </form>
+    <a href="login.html" class="user-icon">
+      <i class="bi bi-person-circle"></i>
+    </a>
+  </div>
+</header>
+
+<!-- Menu de navegação -->
+<nav class="navbar-container">
+  <div class="navbar">
+    <a href="animefire.html" class="navbar-link">Início</a>
+    <a href="#" class="navbar-link" onclick="toggleGenreList()">Gêneros</a>
+    <a href="calendario.html" class="navbar-link">Calendário</a>
+    <a href="novidadades.html" class="navbar-link">Novidades</a>
+  </div>
+</nav>
+
+<!-- Conteúdo Principal -->
+<div class="main-content container mt-4" id="anime-content">
+  <div class="text-center" id="anime-title">
+    <h1 class="text-white" id="anime-name"></h1>
+    <h2 class="text-white" id="episode-name"></h2>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div id="video-container" class="video-container mb-3" style="background-color: black; height: 450px;">
+        <!-- O player de vídeo será carregado aqui -->
+      </div>
+      
+      <!-- Botões de navegação entre episódios -->
+      <div class="d-flex justify-content-between mb-3">
+        <button class="btn btn-danger" id="prevEpisode">Episódio Anterior</button>
+        <button class="btn btn-danger" id="episodeList">Lista de Episódios</button>
+        <button class="btn btn-danger" id="nextEpisode">Próximo Episódio</button>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="episode-summary p-3" id="episode-summary" style="background-color: #222; color: white; border-radius: 10px;">
+        <h3>Resumo do Episódio</h3>
+        <p id="episode-description">Descrição do episódio será carregada aqui.</p>
+        <p id="episode-aired">Data de exibição: </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Seção de Comentários -->
+  <div class="comments-section">
+    <input type="text" class="form-control comment-input mb-2" placeholder="Deixe um comentário...">
+    <button class="btn btn-danger comment-button mb-3">Enviar Comentário</button>
+    <div class="comments-list">
+      <div class="comment">Comentário 1</div>
+      <div class="comment">Comentário 2</div>
+    </div>
+  </div>
+</div>
+<script>
+  async function loadEpisodeDetails() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const animeId = urlParams.get('id'); // Pega o ID do anime
+    const episodeNum = urlParams.get('episode'); // Pega o número do episódio
+
+    // Verifica se o animeId ou episodeNum são inválidos
+    if (!animeId || !episodeNum) {
+      alert('ID do anime ou número do episódio não encontrado ou inválido!');
+      return;
+    }
+
+    try {
+      // Requisições para os detalhes do anime, episódio e vídeos
+      const animeUrl = `https://api.jikan.moe/v4/anime/${animeId}`;
+      const episodeUrl = `https://api.jikan.moe/v4/anime/${animeId}/episodes/${episodeNum}`;
+      const episodeVideosUrl = `https://api.jikan.moe/v4/anime/${animeId}/videos`;
+
+      const [animeResponse, episodeResponse, videosResponse] = await Promise.all([
+        fetch(animeUrl),
+        fetch(episodeUrl),
+        fetch(episodeVideosUrl)
+      ]);
+
+      // Verifica se as respostas da API são válidas
+      if (!animeResponse.ok || !episodeResponse.ok || !videosResponse.ok) {
+        throw new Error('Erro ao carregar os dados da API');
+      }
+
+      const animeData = await animeResponse.json();
+      const episodeData = await episodeResponse.json();
+      const videosData = await videosResponse.json();
+
+      // Carregar informações do anime
+      const animeName = document.getElementById('anime-name');
+      animeName.textContent = animeData.data.title;
+
+      // Carregar informações do episódio
+      const episodeName = document.getElementById('episode-name');
+      episodeName.textContent = `Episódio ${episodeData.data.title}`;
+
+      const episodeDescription = document.getElementById('episode-description');
+      episodeDescription.textContent = episodeData.data.synopsis;
+
+      const episodeAired = document.getElementById('episode-aired');
+      episodeAired.textContent = `Exibido em: ${episodeData.data.aired}`;
+
+      // Exibe o player de vídeo com a URL do episódio
+      const videoContainer = document.getElementById('video-container');
+
+      // Verificar se a resposta de vídeos está vazia
+      if (videosData.data.length === 0) {
+        videoContainer.innerHTML = "<p>Vídeo não disponível para este episódio. <a href='https://www.youtube.com/results?search_query=" + encodeURIComponent(animeData.data.title + " episódio " + episodeNum) + "' target='_blank'>Tente no YouTube</a>.</p>";
+      } else {
+        // Procurar o vídeo do episódio (se disponível)
+        const episodeVideo = videosData.data.find(video => video.episode === parseInt(episodeNum));
+        
+        if (episodeVideo) {
+          videoContainer.innerHTML = `<video controls><source src="${episodeVideo.url}" type="video/mp4"></video>`;
+        } else {
+          videoContainer.innerHTML = "<p>Vídeo não encontrado. <a href='https://www.youtube.com/results?search_query=" + encodeURIComponent(animeData.data.title + " episódio " + episodeNum) + "' target='_blank'>Tente no YouTube</a>.</p>";
+        }
+      }
+
+      // Configurar os botões de navegação entre episódios
+      const prevEpisodeBtn = document.getElementById('prevEpisode');
+      const nextEpisodeBtn = document.getElementById('nextEpisode');
+      const episodeListBtn = document.getElementById('episodeList');
+
+      const prevEpisodeNum = parseInt(episodeNum) - 1;
+      const nextEpisodeNum = parseInt(episodeNum) + 1;
+
+      // Verificar se os episódios anteriores ou seguintes existem
+      prevEpisodeBtn.onclick = () => {
+        window.location.href = `tela_anime.html?id=${animeId}&episode=${prevEpisodeNum}`;
+      };
+      nextEpisodeBtn.onclick = () => {
+        window.location.href = `tela_anime.html?id=${animeId}&episode=${nextEpisodeNum}`;
+      };
+      episodeListBtn.onclick = () => {
+        window.location.href = `episodios.html?id=${animeId}`;
+      };
+    } catch (error) {
+      console.error('Erro ao carregar os detalhes do episódio:', error);
+      alert('Não foi possível carregar os detalhes do episódio.');
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', loadEpisodeDetails);
+</script>
+<script src="js/funcoes.js"></script>
 </body>
 </html>

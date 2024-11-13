@@ -176,7 +176,7 @@ function closeGenreList() {
 
     // Atualizar título do anime e título do episódio
     document.getElementById('anime-name').textContent = anime.title;
-    document.getElementById('episode-title').textContent = `Episódio ${episode.number}`;
+    document.getElementById('episodes-title').textContent = `Episódio ${episode.number}`;
 
     // Atualizar descrição e data de lançamento
     document.getElementById('episode-description').textContent = episode.description;

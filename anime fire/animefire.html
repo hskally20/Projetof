@@ -39,53 +39,35 @@
       </a>
     </div>
   </header>
-
-  <!-- Menu de navegação -->
-  <nav class="navbar-container">
-    <div class="navbar">
-      <a href="animefire.html" class="navbar-link">Início</a>
-      <a class="nav-link" href="#" id="genreToggle" onclick="toggleGenreList()">Gêneros</a>
-      <a href="calendario.html" class="navbar-link">Calendário de Lançamentos</a>
-      <a href="novidadades.html" class="navbar-link">Novidades</a>
-    </div>
-  </nav>
-
-  <!-- Overlay de gêneros -->
-  <div class="overlay" id="genreOverlay">
-    <div class="genre-list">
-      <h3>Gêneros</h3>
-      <ul>
-        <li>Ação</li>
-        <li>Aventura</li>
-        <li>Comédia</li>
-        <li>Drama</li>
-        <li>Fantasia</li>
-        <li>Romance</li>
-        <li>Ficção Científica</li>
-        <li>Shounen</li>
-        <li>Shoujo</li>
-        <li>Sobrenatural</li>
-      </ul>
-      <button class="close-btn" onclick="closeGenreList()">Fechar</button>
-    </div>
-    <div class="overlay">
-     <div class="container">
-       <titlle> animes populares </titlle>
-       <ul>
-        <li>Ação</li>
-        <li>Aventura</li>
-        <li>Comédia</li>
-        <li>Drama</li>
-        <li>Fantasia</li>
-        <li>Romance</li>
-        <li>Ficção Científica</li>
-        <li>Shounen</li>
-        <li>Shoujo</li>
-        <li>Sobrenatural</li>
-      </ul>
-     </div>
-    </div>
+<!-- Menu de navegação -->
+<nav class="navbar-container">
+  <div class="navbar">
+    <a href="animefire.html" class="navbar-link">Início</a>
+    <a class="nav-link" href="#" id="genreToggle" onclick="toggleGenreList()">Gêneros</a>
+    <a href="calendario.html" class="navbar-link">Calendário de Lançamentos</a>
+    <a href="novidadades.html" class="navbar-link">Novidades</a>
   </div>
+</nav>
+
+<!-- Overlay de gêneros -->
+<div class="overlay" id="genreOverlay">
+  <div class="genre-list">
+    <h3>Gêneros</h3>
+    <ul>
+      <li>Ação</li>
+      <li>Aventura</li>
+      <li>Comédia</li>
+      <li>Drama</li>
+      <li>Fantasia</li>
+      <li>Romance</li>
+      <li>Ficção Científica</li>
+      <li>Shounen</li>
+      <li>Shoujo</li>
+      <li>Sobrenatural</li>
+    </ul>
+    <button class="close-btn" onclick="closeGenreList()">Fechar</button>
+  </div>
+</div>
 
   <!-- Layout com o carrossel à esquerda e a lista à direita -->
   <section class="container my-5">
@@ -275,25 +257,25 @@ function renderAnimes() {
     animeContainer.innerHTML = '<p class="text-center">Nenhum anime disponível.</p>';
   }
 }
-// Função para renderizar a paginação
-function renderPagination() {
-  const paginationElement = document.getElementById('pagination').querySelector('.pagination');
-  paginationElement.innerHTML = '';  // Limpa a paginação anterior
+    // Função para renderizar a paginação
+    function renderPagination() {
+            const paginationElement = document.getElementById('pagination').querySelector('.pagination');
+            paginationElement.innerHTML = ''; // Limpa a paginação anterior
 
-  const pageCount = Math.ceil(filteredAnimes.length / animesPerPage);
-  for (let i = 1; i <= pageCount; i++) {
-    const pageItem = document.createElement('li');
-    pageItem.className = 'page-item' + (i === currentPage ? ' active' : '');
-    pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
-    pageItem.querySelector('a').addEventListener('click', (event) => {
-      event.preventDefault();
-      currentPage = i;
-      renderAnimes();
-      renderPagination();
-    });
-    paginationElement.appendChild(pageItem);
-  }
-}
+            const pageCount = Math.ceil(filteredPokemons.length / pokemonsPerPage);
+            for (let i = 1; i <= pageCount; i++) {
+                const pageItem = document.createElement('li');
+                pageItem.className = 'page-item' + (i === currentPage ? ' active' : '');
+                pageItem.innerHTML = `<a class="page-link" href="#">${i}</a>`;
+                pageItem.querySelector('a').addEventListener('click', (event) => {
+                    event.preventDefault();
+                    currentPage = i;
+                    renderPokemons();
+                    renderPagination();
+                });
+                paginationElement.appendChild(pageItem);
+            }
+        }
 
 // Asegura que o DOM está completamente carregado antes de rodar o script
 document.addEventListener('DOMContentLoaded', () => {
