@@ -111,9 +111,6 @@ box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.6);
 cursor: pointer;
 }
 
-.anime-card h3 {
-color: #c32a2a;
-}
 
 .anime-card p {
 color: #c0c0c0;
@@ -843,4 +840,4 @@ footer {
   background-color: #e0e0e0; /* Cor de fundo cinza para itens desativados */
   color: #a0a0a0; /* Cor do texto cinza claro para itens desativados */
   pointer-events: none; /* Desativa clique nos itens desativados */
-}
+};

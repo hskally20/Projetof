@@ -46,32 +46,30 @@
     <div class="genre-list">
       <h3>Gêneros</h3>
       <ul>
-        <li>Ação</li>
-        <li>Aventura</li>
-        <li>Comédia</li>
-        <li>Drama</li>
-        <li>Fantasia</li>
-        <li>Romance</li>
-        <li>Ficção Científica</li>
-        <li>Shounen</li>
-        <li>Shoujo</li>
-        <li>Sobrenatural</li>
+        <li><a onclick="filterByGenre('acao')">Ação</a></li>
+        <li><a onclick="filterByGenre('aventura')">Aventura</a></li>
+        <li><a onclick="filterByGenre('comedia')">Comédia</a></li>
+        <li><a onclick="filterByGenre('drama')">Drama</a></li>
+        <li><a onclick="filterByGenre('fantasia')">Fantasia</a></li>
+        <li><a onclick="filterByGenre('romance')">Romance</a></li>
+        <li><a onclick="filterByGenre('ficcao-cientifica')">Ficção Científica</a></li>
+        <li><a onclick="filterByGenre('shounen')">Shounen</a></li>
+        <li><a onclick="filterByGenre('shoujo')">Shoujo</a></li>
+        <li><a onclick="filterByGenre('sobrenatural')">Sobrenatural</a></li>
       </ul>
       <button class="close-btn" onclick="closeGenreList()">Fechar</button>
     </div>
   </div>
-   <!-- Container para os Animes -->
-   <div id="anime-container" class="container mt-4">
-    <h2 id="anime-title"></h2>
-    <div class="row">
-      <div class="col-md-6">
-        <p id="anime-description" class="lead text-white"></p>
-      </div>
-    </div>
-  </div>
-
+ 
   <!-- Detalhes do Anime e Episódios -->
   <div id="anime-details" class="mt-5"></div>
+</div>
+ 
+ 
+
+<div class="anime-container mt-5" >
+  <h2>Animes Semelhantes</h2>
+  <div class="row mt-4" id="similarAnimeCards"></div>
 </div>
 
 <footer class="bg-dark text-light py-3 mt-4">
@@ -81,6 +79,7 @@
 </footer>
 
 <script>
+
   // Função para carregar os detalhes do anime e episódios
 async function loadAnimeDetails() {
   // Pega o animeId da URL
@@ -139,7 +138,7 @@ async function loadAnimeDetails() {
 // Carregar os detalhes do anime quando a página for carregada
 document.addEventListener('DOMContentLoaded', loadAnimeDetails);
 </script>
-<script src="js/funcoes.js"></script>
+<script src="js/api.js"></script>
 </body>
 </html>
 
