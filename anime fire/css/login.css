@@ -1,0 +1,87 @@
+body {
+    background: url('/img/fundo.gif') no-repeat center center fixed;
+    background-color: #1d1d1d; /* Fundo escuro */
+    color: #fff; /* Texto branco */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Poppins', sans-serif; /* Fonte moderna */
+  }
+
+  .form-container {
+    background-color: #333;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .form-container h2 {
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 30px;
+  }
+
+  .form-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .form-control {
+    background-color: #ffffff;
+    border: 1px solid #555;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .form-control:focus {
+    background-color: #dfdede;
+    border-color: #e74c3c;
+    box-shadow: 0 0 5px rgba(231, 76, 60, 0.6);
+  }
+
+  .btn-danger {
+    width: 100%;
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .btn-danger:hover {
+    background-color: #c0392b;
+    cursor: pointer;
+  }
+
+  .btn-link {
+    color: #e74c3c;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .btn-link:hover {
+    text-decoration: underline;
+  }
+
+  .form-footer {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .form-footer a {
+    color: #bbb;
+    text-decoration: none;
+  }
+
+  .form-footer a:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
