@@ -13,11 +13,11 @@ function closeGenreList() {
 
 // Lista de comentários inicial
 let comments = [
-  { username: 'João', comment: 'Este é um ótimo artigo!' },
-  { username: 'Maria', comment: 'Concordo, muito útil!' },
-  { username: 'Pedro', comment: 'Interessante, mas poderia ter mais detalhes.' },
-  { username: 'Lucas', comment: 'Muito bem explicado, gostei muito!' },
-  { username: 'Carla', comment: 'Que bom que você gostou, vou tentar adicionar mais informações!' }
+  { username: 'João', comment: 'Este anime é incrível, recomendo a todos!' },
+  { username: 'Maria', comment: 'Adorei os personagens e a trama, vale a pena assistir!' },
+  { username: 'Pedro', comment: 'A animação é boa, mas a história poderia ser mais envolvente.' },
+  { username: 'Lucas', comment: 'Os episódios são emocionantes e cheios de ação!' },
+  { username: 'Carla', comment: 'Estou ansiosa para a próxima temporada, foi uma ótima experiência!' }
 ];
 
 // Inicializa a página com os dois primeiros comentários e o botão
