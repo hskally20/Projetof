@@ -37,7 +37,6 @@ async function loadAnimes(queryParams = null) {
     }
   } catch (error) {
     console.error('Erro ao buscar os animes:', error);
-    alert('Não foi possível carregar os animes.');
   }
 }
 
@@ -266,7 +265,6 @@ function renderSimilarAnimes(similarAnimes) {
   const similarAnimesContainer = document.getElementById('similar-animes-container');
   
   if (!similarAnimesContainer) {
-    console.error('Elemento #similar-animes-container não encontrado');
     return;
   }
 
@@ -297,3 +295,114 @@ function renderSimilarAnimes(similarAnimes) {
 document.addEventListener('DOMContentLoaded', () => {
   loadAnimes(getQueryParams()); // Carrega os animes ao carregar a página
 });
+
+// ========================  tela de reprodução ======================= 
+
+async function loadEpisodeDetails() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const animeId = urlParams.get('id'); // Pega o ID do anime
+  const episodeNum = urlParams.get('episode'); // Pega o número do episódio
+
+  // Verifica se o animeId ou episodeNum são inválidos
+  if (!animeId || !episodeNum) {
+    
+    return;
+  }
+
+  try {
+    // Requisições para os detalhes do anime, episódio e vídeos
+    const animeUrl = `https://api.jikan.moe/v4/anime/${animeId}`;
+    const episodeUrl = `https://api.jikan.moe/v4/anime/${animeId}/episodes/${episodeNum}`;
+    const episodeVideosUrl = `https://api.jikan.moe/v4/anime/${animeId}/videos/episodes`;
+
+    const [animeResponse, episodeResponse, videosResponse] = await Promise.all([
+      fetch(animeUrl),
+      fetch(episodeUrl),
+      fetch(episodeVideosUrl)
+    ]);
+
+    // Verifica se as respostas da API são válidas
+    if (!animeResponse.ok || !episodeResponse.ok || !videosResponse.ok) {
+      throw new Error('Erro ao carregar os dados da API');
+    }
+
+    const animeData = await animeResponse.json();
+    const episodeData = await episodeResponse.json();
+    const videosData = await videosResponse.json();
+
+    // Carregar informações do anime
+    const animeName = document.getElementById('anime-name');
+    animeName.textContent = animeData.data.title;
+
+    // Carregar informações do episódio
+    const episodeName = document.getElementById('episode-name');
+    episodeName.textContent = `Episódio ${episodeData.data.title}`;
+
+    const episodeDescription = document.getElementById('episode-description');
+    episodeDescription.textContent = episodeData.data.synopsis;
+
+    const episodeAired = document.getElementById('episode-aired');
+    episodeAired.textContent = `Exibido em: ${episodeData.data.aired}`;
+
+    // Exibe o player de vídeo com a URL do episódio
+    const videoContainer = document.getElementById('video-container');
+
+    // Verificar se a resposta de vídeos está vazia
+    if (videosData.data.episodes && videosData.data.episodes.length > 0) {
+      // Procurar o vídeo do episódio (se disponível)
+      const episodeVideo = videosData.data.episodes.find(video => video.episode === parseInt(episodeNum));
+
+      if (episodeVideo && episodeVideo.url) {
+        // Exibe o vídeo usando a URL fornecida pela API
+        videoContainer.innerHTML = `<video controls><source src="${episodeVideo.url}" type="video/mp4"></video>`;
+      } else {
+        // Caso o vídeo não seja encontrado, incorpora o link do YouTube
+        const youtubeSearchQuery = encodeURIComponent(animeData.data.title + " episódio " + episodeNum);
+        const youtubeEmbedUrl = `https://www.youtube.com/embed/${youtubeSearchQuery}`;
+        videoContainer.innerHTML = `
+          <p>Vídeo não disponível para este episódio. Tente assistir no YouTube:</p>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/${youtubeSearchQuery}" 
+                  title="YouTube video player" frameborder="0" 
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+          </iframe>
+        `;
+      }
+    } else {
+      // Caso não haja vídeos disponíveis
+      const youtubeSearchQuery = encodeURIComponent(animeData.data.title + " episódio " + episodeNum);
+      videoContainer.innerHTML = `
+        <p>Vídeo não disponível para este episódio. Tente assistir no YouTube:</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/${youtubeSearchQuery}" 
+                title="YouTube video player" frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+      `;
+    }
+
+    // Configurar os botões de navegação entre episódios
+    const prevEpisodeBtn = document.getElementById('prevEpisode');
+    const nextEpisodeBtn = document.getElementById('nextEpisode');
+    const episodeListBtn = document.getElementById('episodeList');
+
+    const prevEpisodeNum = parseInt(episodeNum) - 1;
+    const nextEpisodeNum = parseInt(episodeNum) + 1;
+
+    // Verificar se os episódios anteriores ou seguintes existem
+    prevEpisodeBtn.onclick = () => {
+      window.location.href = `tela_anime.html?id=${animeId}&episode=${prevEpisodeNum}`;
+    };
+    nextEpisodeBtn.onclick = () => {
+      window.location.href = `tela_anime.html?id=${animeId}&episode=${nextEpisodeNum}`;
+    };
+    episodeListBtn.onclick = () => {
+      window.location.href = `lista-ep.html?id=${animeId}`;
+    };
+  } catch (error) {
+    console.error('Erro ao carregar os detalhes do episódio:', error);
+    alert('Não foi possível carregar os detalhes do episódio.');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadEpisodeDetails);
