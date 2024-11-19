@@ -841,3 +841,67 @@ footer {
   color: #a0a0a0; /* Cor do texto cinza claro para itens desativados */
   pointer-events: none; /* Desativa clique nos itens desativados */
 };
+
+/* Estilo para a seção de novidades */
+.novidades-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 colunas de tamanho igual */
+  gap: 20px; /* Espaçamento entre os itens */
+  margin-top: 20px;
+  padding: 10px;
+}
+
+.novidade {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.novidade img {
+  width: 100%;
+  height: auto;
+  border-bottom: 2px solid ;
+}
+
+.novidade-info {
+  padding: 10px;
+}
+
+.novidade h2 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.novidade .button {
+  background-color: #e74c3c;
+ 
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.novidade .button:hover {
+  background-color: #c0392b;
+}
+
+/* Responsividade: para telas menores */
+@media (max-width: 1200px) {
+  .novidades-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 colunas */
+  }
+}
+
+@media (max-width: 900px) {
+  .novidades-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+  }
+}
+
+@media (max-width: 600px) {
+  .novidades-container {
+    grid-template-columns: 1fr; /* 1 coluna */
+  }
+}

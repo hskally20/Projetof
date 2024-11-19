@@ -261,35 +261,7 @@ async function loadSimilarAnimes(animeId) {
 }
 
 // Função para renderizar animes semelhantes
-function renderSimilarAnimes(similarAnimes) {
-  const similarAnimesContainer = document.getElementById('similar-animes-container');
-  
-  if (!similarAnimesContainer) {
-    return;
-  }
 
-  similarAnimesContainer.innerHTML = ''; // Limpa o container
-
-  if (similarAnimes && similarAnimes.length > 0) {
-    similarAnimes.forEach(anime => {
-      const card = document.createElement('div');
-      card.className = 'col-md-3 mb-4';
-      card.innerHTML = `
-        <div class="anime-card">
-          <a href="lista-ep.html?id=${anime.node.mal_id}" class="card">
-            <img src="${anime.node.images.jpg.image_url}" class="card-img-top anime-img" alt="${anime.node.title}">
-            <div class="card-content">
-              <h5 class="card-title">${anime.node.title}</h5>
-            </div>
-          </a>
-        </div>
-      `;
-      similarAnimesContainer.appendChild(card);
-    });
-  } else {
-    similarAnimesContainer.innerHTML = '<p class="text-center">Nenhum anime semelhante encontrado.</p>';
-  }
-}
 
 // Inicializa a página de animes
 document.addEventListener('DOMContentLoaded', () => {
