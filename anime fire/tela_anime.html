@@ -38,6 +38,28 @@
   </div>
 </nav>
 
+<!-- Overlay de gêneros -->
+<div class="overlay" id="genreOverlay">
+  <div class="genre-list">
+    <h3>Gêneros</h3>
+    <!-- Alteração no código de gêneros no menu -->
+    <ul>
+      <li><a onclick="filterByGenre('acao')">Ação</a></li>
+      <li><a onclick="filterByGenre('aventura')">Aventura</a></li>
+      <li><a onclick="filterByGenre('comedia')">Comédia</a></li>
+      <li><a onclick="filterByGenre('drama')">Drama</a></li>
+      <li><a onclick="filterByGenre('fantasia')">Fantasia</a></li>
+      <li><a onclick="filterByGenre('romance')">Romance</a></li>
+      <li><a onclick="filterByGenre('ficcao-cientifica')">Ficção Científica</a></li>
+      <li><a onclick="filterByGenre('shounen')">Shounen</a></li>
+      <li><a onclick="filterByGenre('shoujo')">Shoujo</a></li>
+      <li><a onclick="filterByGenre('sobrenatural')">Sobrenatural</a></li>
+    </ul>
+
+    <button class="close-btn" onclick="closeGenreList()">Fechar</button>
+  </div>
+</div>
+
 <!-- Conteúdo Principal -->
 <div class="main-content container mt-4" id="anime-content">
   <div class="text-center" id="anime-title">
@@ -76,7 +98,7 @@
     <div id="commentsListDiv"> </div> <!-- Renomeado para evitar ID duplicado -->
   </div>
   
-  <h3>Comentários</h3>
+  <h2>Comentários</h2>
   <ul id="commentsList" class="list-group">
     <!-- Os comentários serão inseridos aqui -->
   </ul>

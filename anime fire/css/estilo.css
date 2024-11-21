@@ -277,7 +277,9 @@ input#search:focus {
 h2 {
     color: #c32a2a;
 }
-
+h4 {
+  color: #ffffff;
+}
 /* Adicionando um efeito de hover nos cards de anime */
 .anime-card:hover {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);

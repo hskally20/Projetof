@@ -218,7 +218,8 @@ async function loadAnimeDetails() {
           <p class="card-text">${animeData.data.synopsis}</p>
         </div>
       </div>
-      <h3 class="mt-4>Episódios</h3>
+      <h1 class="mt-4>Episódios</h1>
+      <h4 class="mt-4> para assitir o episodio click em assitir </h4>
       <ul class="list-group" id="episode-list"></ul>
     `;
 
