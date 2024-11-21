@@ -166,10 +166,12 @@ function searchAnimes(event) {
 
   const query = document.querySelector('input[name="query"]').value; // Obtém o valor da pesquisa
   if (query.trim()) {
+    
     // Redireciona para a página de resultados com a query na URL
     window.location.href = `resultados.html?query=${encodeURIComponent(query)}`;
   }
 }
+
 
 // Função chamada ao filtrar por gênero
 function filterByGenre(genre) {
