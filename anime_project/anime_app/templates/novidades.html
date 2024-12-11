@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Novidades - Anime Fire{% endblock %}
+
+{% block content %}
+    <div>
+        <h1>Novidades</h1>
+    </div>
+    <div class="container">
+        <section class="novidades-container" id="novidades-container">
+            <!-- Aqui os dados serão inseridos dinamicamente -->
+        </section>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        async function carregarNovidades() {
+            const container = document.getElementById('novidades-container');
+            try {
+                const response = await fetch('https://api.jikan.moe/v4/seasons/now');
+                if (!response.ok) {
+                    throw new Error('Erro ao obter dados');
+                }
+
+                const data = await response.json();
+                const animes = data.data; // Lista de animes em exibição
+
+                container.innerHTML = ''; // Limpar conteúdo anterior
+
+                animes.forEach(anime => {
+                    const animeElement = document.createElement('div');
+                    animeElement.classList.add('novidade');
+                    
+                    animeElement.innerHTML = `
+                        <img src="${anime.images.jpg.image_url}" alt="${anime.title}">
+                        <div class="novidade-info">
+                            <h2>${anime.title}</h2>
+                            <a href="lista-ep.html?id=${anime.mal_id}" class="button">Assistir Agora</a>
+                        </div>
+                    `;
+                    
+                    container.appendChild(animeElement);
+                });
+            } catch (error) {
+                console.error('Erro ao carregar novidades:', error);
+                container.innerHTML = '<p>Erro ao carregar novidades. Tente novamente mais tarde.</p>';
+            }
+        }
+
+        window.onload = carregarNovidades;
+    </script>
+{% endblock %}

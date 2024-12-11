@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Calendário de Lançamentos - Anime Fire{% endblock %}
+
+{% block content %}
+    <div>
+        <h1>Calendário de Lançamentos de Animes</h1>
+    </div>
+    <section class="calendar-container">
+        <ul class="days">
+            <li class="day">
+                <section class="calendar-day">
+                    <header class="day-date">2024-10-23 (Qua)</header>
+                    <div class="anime-info">
+                        <img src="{% static 'img/anime_1.webp' %}" alt="Anime 1">
+                        <div class="anime-details">
+                            <h2>Attack on Titan: Final Season</h2>
+                            <p>O episódio final da saga épica.</p>
+                        </div>
+                    </div>
+                </section>
+            </li>
+            <li class="day">
+                <section class="calendar-day">
+                    <header class="day-date">2024-10-25 (Sex)</header>
+                    <div class="anime-info">
+                        <img src="{% static 'img/anime_2.jfif' %}" alt="Anime 2">
+                        <div class="anime-details">
+                            <h2>Demon Slayer: Swordsmith Village Arc</h2>
+                            <p>Início da nova temporada com novos desafios.</p>
+                        </div>
+                    </div>
+                </section>
+            </li>
+            <li class="day">
+                <section class="calendar-day">
+                    <header class="day-date">2024-10-28 (Seg)</header>
+                    <div class="anime-info">
+                        <img src="{% static 'img/anime_3.webp' %}" alt="Anime 3">
+                        <div class="anime-details">
+                            <h2>One Piece</h2>
+                            <p>O próximo episódio de One Piece continua a aventura de Luffy.</p>
+                        </div>
+                    </div>
+                </section>
+            </li>
+        </ul>
+    </section>
+{% endblock %}

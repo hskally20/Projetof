@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}Resultados da Pesquisa - Anime Fire{% endblock %}
+
+{% block content %}
+    <div>
+        <h1>Resultados da Pesquisa</h1>
+    </div>
+    
+    <!-- Container para os animes -->
+    <div id="anime-container" class="row mt-4"></div>
+
+    <!-- Paginação -->
+    <nav id="pagination" aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center"></ul>
+    </nav>
+{% endblock %}
+
+{% block extra_js %}
+    <script src="{% static 'js/funcoes.js' %}"></script>
+    <script src="{% static 'js/api.js' %}"></script>
+
+    <script>
+        async function fetchSearchResults() {
+            const query = new URLSearchParams(window.location.search).get('query');
+            if (!query) {
+                document.getElementById('anime-container').innerHTML = '<p>Por favor, insira um termo de pesquisa.</p>';
+                return;
+            }
+            
+            const container = document.getElementById('anime-container');
+            const pagination = document.getElementById('pagination');
+            
+            try {
+                const response = await fetch(`https://api.jikan.moe/v4/anime?q=${query}&page=1`);
+                const data = await response.json();
+
+                if (data.data.length === 0) {
+                    container.innerHTML = '<p>Nenhum resultado encontrado.</p>';
+                    return;
+                }
+
+                container.innerHTML = ''; // Limpar o conteúdo anterior
+                data.data.forEach(anime => {
+                    const animeElement = document.createElement('div');
+                    animeElement.classList.add('col-md-4', 'mb-4');
+                    animeElement.innerHTML = `
+                        <div class="card">
+                            <img src="${anime.images.jpg.image_url}" alt="${anime.title}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">${anime.title}</h5>
+                                <a href="lista-ep.html?id=${anime.mal_id}" class="btn btn-danger">Assistir Agora</a>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(animeElement);
+                });
+
+                // Paginação
+                const totalPages = data.pagination.last_page;
+                pagination.innerHTML = ''; // Limpar paginação anterior
+                for (let i = 1; i <= totalPages; i++) {
+                    const pageItem = document.createElement('li');
+                    pageItem.classList.add('page-item');
+                    pageItem.innerHTML = `<a class="page-link" href="?query=${query}&page=${i}">${i}</a>`;
+                    pagination.appendChild(pageItem);
+                }
+            } catch (error) {
+                console.error('Erro ao buscar resultados:', error);
+                container.innerHTML = '<p>Erro ao carregar resultados. Tente novamente mais tarde.</p>';
+            }
+        }
+
+        // Chama a função ao carregar a página
+        window.onload = fetchSearchResults;
+    </script>
+{% endblock %}

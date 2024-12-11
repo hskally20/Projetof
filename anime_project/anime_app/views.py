@@ -33,7 +33,7 @@ def index(request):
         'total_animes': data.get('pagination', {}).get('items', {}).get('total', 0),
         'current_page': page,
     }
-    return render(request, 'anime_app/index.html', context)
+    return render(request, 'index.html', context)
 
 # Função para exibir detalhes de um anime
 def anime_details(request, anime_id):
@@ -61,3 +61,10 @@ def episode_details(request, anime_id, episode_num):
     }
     return render(request, 'anime_app/episode_details.html', context)
 
+def calendario(request):
+    return render(request, 'calendario.html')
+
+def novidades(request):
+    return render(request, 'novidades.html')
+def resultados(request):
+    return render(request, 'resultados.html')
