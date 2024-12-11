@@ -20,15 +20,15 @@
   <header>
     <!-- Logo -->
     <div class="logo">
-      <img src="img/teste3.png" alt="Logo Anime Fire" class="logo-img">
+      <img src="{% static 'img/teste3.png' %}" alt="Logo Anime Fire" class="logo-img">
     </div>
 
     <!-- Barra de pesquisa e ícone de usuário -->
     <div class="d-flex align-items-center">
-      <form action="resultados.html" method="GET" class="d-flex">
+      <form action="{% url 'resultados' %}" method="get" class="d-flex">
         <input type="text" class="form-control" name="query" placeholder="Pesquisar...">
         <button type="submit" class="btn btn-danger">Pesquisar</button>
-      </form>
+    </form>
       <a href="{% url 'login' %}" class="user-icon">
         <i class="bi bi-person-circle"></i>
       </a>

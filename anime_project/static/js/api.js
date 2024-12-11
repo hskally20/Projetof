@@ -87,7 +87,7 @@ function renderAnimes() {
         card.className = 'col-md-3 mb-4';  // Card ocupará 3 colunas
         card.innerHTML = `
           <div class="anime-card">
-            <a href="lista-ep.html?id=${anime.mal_id}" class="card">
+           <a href="/anime/${anime.mal_id}/" class="card">
               <img src="${anime.images.jpg.image_url}" class="card-img-top anime-img" alt="${anime.title}">
               <div class="card-content">
                 <h5 class="card-title">${anime.title}</h5>

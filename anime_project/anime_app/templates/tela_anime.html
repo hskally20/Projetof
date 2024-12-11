@@ -1,0 +1,54 @@
+{% extends 'modelo.html' %}
+
+{% block title %}Episódio {{ episode_number }} - {{ anime_title }} - Anime Fire{% endblock %}
+
+{% block content %}
+ 
+  <!-- Conteúdo Principal -->
+  <div class="main-content container mt-4" id="anime-content">
+    <div class="text-center" id="anime-title">
+      <h1 class="text-white">{{ anime_title }}</h1>
+      <h2 class="text-white">{{ episode_title }}</h2>
+    </div>
+
+    <div class="row">
+      <div class="col-md-8">
+        <div id="video-container" class="video-container mb-3" style="background-color: black; height: 450px;">
+          <!-- O vídeo do episódio vai aqui -->
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ youtube_video_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        
+        <!-- Botões de navegação entre episódios -->
+        <div class="d-flex justify-content-between mb-3">
+          <button class="btn btn-danger" id="prevEpisode">Episódio Anterior</button>
+          <button class="btn btn-danger" id="episodeList">Lista de Episódios</button>
+          <button class="btn btn-danger" id="nextEpisode">Próximo Episódio</button>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="episode-summary p-3" id="episode-summary" style="background-color: #222; color: white; border-radius: 10px;">
+          <h3>Resumo do Episódio</h3>
+          <p id="episode-description">{{ episode_description }}</p>
+          <p id="episode-aired">Data de exibição: {{ episode_aired }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Seção de Comentários -->
+    <div class="comments-section">
+      <input type="text" class="form-control comment-input mb-2" placeholder="Deixe um comentário..." id="commentInput">
+      <button class="btn btn-danger comment-button mb-3" onclick="addComment()">Enviar Comentário</button>
+      <div id="commentsListDiv"> </div> <!-- Renomeado para evitar ID duplicado -->
+    </div>
+    
+    <h2>Comentários</h2>
+    <ul id="commentsList" class="list-group">
+      <!-- Os comentários serão inseridos aqui -->
+    </ul>
+    <button id="showMoreBtn" class="btn btn-danger" onclick="toggleComments()">Mostrar mais</button>
+  </div>
+</div>
+
+
+{% endblock %}

@@ -1,24 +1,46 @@
-{% extends 'base.html' %}
+{% extends 'modelo.html' %}
 
 {% block title %}Resultados da Pesquisa - Anime Fire{% endblock %}
 
 {% block content %}
     <div>
         <h1>Resultados da Pesquisa</h1>
+        {% if query %}
+            <p>Você pesquisou por: "{{ query }}"</p>
+        {% else %}
+            <p>Por favor, insira um termo de pesquisa.</p>
+        {% endif %}
     </div>
     
     <!-- Container para os animes -->
-    <div id="anime-container" class="row mt-4"></div>
+    <div id="anime-container" class="row mt-4">
+        {% if animes %}
+            {% for anime in animes %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ anime.images.jpg.image_url }}" alt="{{ anime.title }}" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ anime.title }}</h5>
+                            <a href="lista-ep.html?id={{ anime.mal_id }}" class="btn btn-danger">Assistir Agora</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Nenhum resultado encontrado.</p>
+        {% endif %}
+    </div>
 
     <!-- Paginação -->
     <nav id="pagination" aria-label="Page navigation" class="mt-4">
-        <ul class="pagination justify-content-center"></ul>
+        <ul class="pagination justify-content-center">
+            <!-- Adicionar paginação, caso necessário -->
+        </ul>
     </nav>
 {% endblock %}
 
+
 {% block extra_js %}
-    <script src="{% static 'js/funcoes.js' %}"></script>
-    <script src="{% static 'js/api.js' %}"></script>
 
     <script>
         async function fetchSearchResults() {

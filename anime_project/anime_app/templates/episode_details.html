@@ -3,15 +3,13 @@
 {% block title %}Episódio {{ episode.episode_number }} - {{ episode.anime.title }} - Anime Fire{% endblock %}
 
 {% block content %}
-  <div class="container my-5">
-    <h1 class="text-center">{{ episode.anime.title }} - Episódio {{ episode.episode_number }}: {{ episode.title }}</h1>
-    <div class="row">
-      <div class="col-md-12">
-        <p><strong>Lançamento:</strong> {{ episode.release_date }}</p>
-        <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" src="{{ episode.video_url }}" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
+  <!-- Detalhes do Anime e Episódios -->
+  <div id="anime-details" class="mt-5"></div>
+
+  <div class="anime-container mt-5">
+    <h2>Animes Semelhantes</h2>
+    <div class="row mt-4" id="similarAnimeCards"></div>
   </div>
+
+
 {% endblock %}
