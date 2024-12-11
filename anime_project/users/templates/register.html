@@ -1,0 +1,15 @@
+{% extends 'anime_app/modelo.html' %}
+
+{% block title %}Cadastro de Usuário{% endblock %}
+
+{% block content %}
+  <div class="container my-5">
+    <h1 class="text-center">Cadastro de Usuário</h1>
+    <h2>Registro</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Renderiza o formulário -->
+        <button type="submit">Registrar</button>
+    </form>
+  </div>
+{% endblock %}
