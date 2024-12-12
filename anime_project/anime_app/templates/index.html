@@ -1,5 +1,5 @@
 {% extends 'modelo.html' %}
-
+{% load static %}
 {% block title %}Início - Anime Fire{% endblock %}
 
 {% block content %}
@@ -13,17 +13,17 @@
           <div class="carousel-inner">
             <div class="carousel-item active">
               <div class="alinhar">
-                <img src="img/anime_3.webp" class="d-block w-100">
+                <img src="{% static 'img/anime_3.webp' %}" class="d-block w-100">
               </div>  
             </div>
             <div class="carousel-item">
               <div class="alinhar">
-                <img src="img/dragonball-novidades.webp" class="d-block w-100">
+                <img src="{% static 'img/dragonball-novidades.webp' %}" class="d-block w-100">
               </div>
             </div>
             <div class="carousel-item">
               <div class="alinhar">
-                <img src="img/anime_1.webp" class="d-block w-100">
+                <img src="{% static 'img/anime_1.webp' %}" class="d-block w-100">
               </div>
             </div>
           </div>
