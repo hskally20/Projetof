@@ -15,7 +15,7 @@ def register(request):
     else:
         form = CustomUserCreationForm()  # Exibe o formulário vazio
 
-    return render(request, 'users/register.html', {'form': form})
+    return render(request, 'register.html', {'form': form})
 
 # View de Login
 def login_view(request):
@@ -28,4 +28,4 @@ def login_view(request):
     else:
         form = AuthenticationForm()  # Exibe o formulário vazio
 
-    return render(request, 'users/login.html', {'form': form})
+    return render(request, 'login.html', {'form': form})
