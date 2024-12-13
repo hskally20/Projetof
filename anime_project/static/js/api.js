@@ -104,16 +104,20 @@ function renderAnimeDetails(anime, episodes) {
       <img src="${anime.images.jpg.large_image_url}" class="card-img-top img-fluid" alt="${anime.title}">
       <div class="card-body">
         <h5 class="card-title">${anime.title}</h5>
-        <p class="card-text">${anime.synopsis}</p>
+        <p class="card-text">${anime.synopsis || 'Descrição não disponível'}</p>
+        <p><strong>Lançamento:</strong> ${anime.aired?.prop?.from?.string || 'Não informado'}</p>
+        <p><strong>Gêneros:</strong> ${anime.genres.map(genre => genre.name).join(', ') || 'Não disponível'}</p>
       </div>
     </div>
     <h1 class="mt-4">Episódios</h1>
     <ul class="list-group" id="episode-list">
-      ${episodes.map(ep => `
-        <li class="list-group-item">
-          <strong>Ep. ${ep.mal_id}</strong>: ${ep.title}
-          <a href="tela_anime.html?id=${anime.mal_id}&episode=${ep.mal_id}" class="btn btn-sm btn-primary float-end">Assistir</a>
-        </li>`).join('')}
+      ${episodes.length
+        ? episodes.map(ep => `
+          <li class="list-group-item">
+            <strong>Ep. ${ep.mal_id}</strong>: ${ep.title || 'Sem título'}
+            <a href="/anime/${anime.mal_id}/episode/${ep.mal_id}" class="btn btn-sm btn-primary float-end">Assistir</a>
+          </li>`).join('')
+        : '<li class="list-group-item">Não há episódios disponíveis.</li>'}
     </ul>`;
 }
 

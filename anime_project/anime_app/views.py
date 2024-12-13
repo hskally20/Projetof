@@ -36,17 +36,27 @@ def index(request):
     return render(request, 'index.html', context)
 
 # Função para exibir detalhes de um anime
+# Função para exibir detalhes de um anime
 def anime_details(request, anime_id):
-    base_url = f'https://api.jikan.moe/v4/anime/{anime_id}'
+    anime_url = f'https://api.jikan.moe/v4/anime/{anime_id}'
+    episodes_url = f'https://api.jikan.moe/v4/anime/{anime_id}/episodes'
 
-    # Realiza a requisição para obter os detalhes do anime
-    response = requests.get(base_url)
-    anime_data = response.json()
+    try:
+        # Requisição para obter detalhes do anime
+        anime_response = requests.get(anime_url)
+        episodes_response = requests.get(episodes_url)
+        anime_data = anime_response.json().get('data', {})
+        episodes_data = episodes_response.json().get('data', [])
+    except Exception as e:
+        print(f"Erro ao carregar dados do anime: {e}")
+        anime_data, episodes_data = {}, []
 
     context = {
-        'anime': anime_data.get('data', {}),
+        'anime': anime_data,
+        'episodes': episodes_data,
     }
     return render(request, 'animes_details.html', context)
+
 
 # Função para exibir detalhes de um episódio
 def episode_details(request, anime_id, episode_num):
@@ -88,9 +98,8 @@ def resultados(request):
 
     return render(request, 'resultados.html', {'animes': animes, 'query': query})
 
-
 def episode_player(request, anime_id, episode_id):
-    # URL da API para obter dados do anime e do episódio
+    # URLs da API para obter dados do anime e do episódio
     anime_url = f'https://api.jikan.moe/v4/anime/{anime_id}'
     episode_url = f'https://api.jikan.moe/v4/anime/{anime_id}/episodes/{episode_id}'
 
@@ -99,15 +108,20 @@ def episode_player(request, anime_id, episode_id):
     episode_response = requests.get(episode_url)
 
     if anime_response.status_code == 200 and episode_response.status_code == 200:
-        anime_data = anime_response.json()['data']
-        episode_data = episode_response.json()['data']
+        anime_data = anime_response.json().get('data', {})
+        episode_data = episode_response.json().get('data', {})
 
         # Extraindo informações necessárias
-        anime_title = anime_data['title']
-        episode_title = episode_data['title']
-        episode_description = episode_data['synopsis']
-        episode_aired = episode_data['aired']['string']
-        youtube_video_id = episode_data['videos']['promotion'][0]['youtube_id']
+        anime_title = anime_data.get('title', 'Título não disponível')
+        episode_title = episode_data.get('title', f'Episódio {episode_id}')
+        episode_description = episode_data.get('synopsis', 'Descrição não disponível')
+        episode_aired = episode_data.get('aired', {}).get('string', 'Data não disponível')
+        
+        # Obtendo o vídeo do YouTube, se existir
+        youtube_video_id = None
+        promotion_videos = episode_data.get('videos', {}).get('promotion', [])
+        if promotion_videos and isinstance(promotion_videos, list):
+            youtube_video_id = promotion_videos[0].get('youtube_id', None)
 
         # Passando as variáveis para o template
         context = {
@@ -121,4 +135,5 @@ def episode_player(request, anime_id, episode_id):
 
         return render(request, 'tela_anime.html', context)
 
+    # Redireciona para uma página de erro se a API não responder corretamente
     return render(request, '404.html')

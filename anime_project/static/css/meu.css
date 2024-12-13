@@ -921,3 +921,12 @@ footer {
   z-index: 1000;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+/* Texto padrão branco */
+body, h1, h2, h3, h4, h5, h6, p, ul, li, a, span, input, button, .card-text, .card-title, .list-group-item, .anime-card p, .navbar-link, .form-select, .genre-list ul li {
+  color: white; /* Define o texto como branco */
+}
+
+/* Mantém os textos vermelhos */
+h2, .navbar-container, .navbar-link:hover, .anime-card h3, .carousel-container, .close-btn {
+  color: red; /* Textos que já estavam definidos como vermelhos */
+}

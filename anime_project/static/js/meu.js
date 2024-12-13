@@ -22,7 +22,7 @@ async function carregarNovidades() {
                     <img src="${anime.images.jpg.image_url}" alt="${anime.title}" class="novidade-img">
                     <div class="novidade-info">
                         <h2>${anime.title}</h2>
-                        <a href="lista-ep.html?id=${anime.mal_id}" class="button">Assistir Agora</a>
+                        <a href="/anime/${anime.mal_id}/" class="button">Assistir Agora</a>
                     </div>
                 `;
                 
