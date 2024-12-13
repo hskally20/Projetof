@@ -1,6 +1,55 @@
 import requests
 from django.shortcuts import render
+from django.views.decorators.csrf import csrf_exempt
+from .models import Comment
+import json
 
+def load_comments(request):
+    episode_id = request.GET.get('episode_id')
+    
+    # Obtém os comentários do banco de dados para o episódio específico
+    comments = Comment.objects.filter(episode_id=episode_id).order_by('-created_at')
+    
+    # Serializa os dados para enviar ao frontend
+    comments_data = [
+        {
+            'user_name': comment.user_name,
+            'content': comment.content,
+            'created_at': comment.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            'id': comment.id,
+        }
+        for comment in comments
+    ]
+    
+    return JsonResponse(comments_data, safe=False)
+
+@csrf_exempt  # Decorador para desabilitar a verificação CSRF (apenas para testes ou use de forma mais segura com o CSRF token no frontend)
+def add_comment(request):
+    if request.method == 'POST':
+        try:
+            # Extrair dados do corpo da requisição
+            import json
+            data = json.loads(request.body)
+
+            user_name = data.get('user_name')
+            content = data.get('content')
+            episode_id = data.get('episode_id')
+
+            if not user_name or not content or not episode_id:
+                return JsonResponse({'error': 'Todos os campos são obrigatórios'}, status=400)
+            
+            # Cria um novo comentário no banco de dados
+            new_comment = Comment.objects.create(
+                user_name=user_name,
+                content=content,
+                episode_id=episode_id
+            )
+            return JsonResponse({'success': 'Comentário adicionado com sucesso'}, status=201)
+        
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Método não permitido'}, status=405)
 # Função para exibir a página inicial com a lista de animes
 def index(request):
     page = request.GET.get('page', 1)
@@ -59,19 +108,8 @@ def anime_details(request, anime_id):
 
 
 # Função para exibir detalhes de um episódio
-def episode_details(request, anime_id, episode_num):
-    base_url = f'https://api.jikan.moe/v4/anime/{anime_id}/episodes/{episode_num}'
+   
 
-    # Realiza a requisição para obter os detalhes do episódio
-    response = requests.get(base_url)
-    episode_data = response.json()
-
-    context = {
-        'episode': episode_data.get('data', {}),
-        'anime_id': anime_id,
-        'episode_num': episode_num,
-    }
-    return render(request, 'episode_details.html', context)
 
 # Função para exibir o calendário
 def calendario(request):
@@ -103,37 +141,50 @@ def episode_player(request, anime_id, episode_id):
     anime_url = f'https://api.jikan.moe/v4/anime/{anime_id}'
     episode_url = f'https://api.jikan.moe/v4/anime/{anime_id}/episodes/{episode_id}'
 
-    # Requisições para obter os dados
-    anime_response = requests.get(anime_url)
-    episode_response = requests.get(episode_url)
+    try:
+        # Requisições para obter os dados
+        anime_response = requests.get(anime_url)
+        episode_response = requests.get(episode_url)
 
-    if anime_response.status_code == 200 and episode_response.status_code == 200:
-        anime_data = anime_response.json().get('data', {})
-        episode_data = episode_response.json().get('data', {})
+        # Verifica se ambas as requisições foram bem-sucedidas
+        if anime_response.status_code == 200 and episode_response.status_code == 200:
+            anime_data = anime_response.json().get('data', {})
+            episode_data = episode_response.json().get('data', {})
 
-        # Extraindo informações necessárias
-        anime_title = anime_data.get('title', 'Título não disponível')
-        episode_title = episode_data.get('title', f'Episódio {episode_id}')
-        episode_description = episode_data.get('synopsis', 'Descrição não disponível')
-        episode_aired = episode_data.get('aired', {}).get('string', 'Data não disponível')
+            # Extraindo informações necessárias
+            anime_title = anime_data.get('title', 'Título não disponível')
+            episode_title = episode_data.get('title', f'Episódio {episode_id}')
+            episode_description = episode_data.get('synopsis', 'Descrição não disponível')
+
+            # Verifica se 'aired' é um dicionário e se tem a chave 'string'
+            episode_aired = episode_data.get('aired', {})
+            if isinstance(episode_aired, dict):
+                episode_aired = episode_aired.get('string', 'Data não disponível')
+            else:
+                episode_aired = 'Data não disponível'
+
+            # Obtendo o vídeo do YouTube, se existir
+            youtube_video_id = None
+            promotion_videos = episode_data.get('videos', {}).get('promotion', [])
+            if promotion_videos and isinstance(promotion_videos, list) and len(promotion_videos) > 0:
+                youtube_video_id = promotion_videos[0].get('youtube_id', None)
+
+            # Passando as variáveis para o template
+            context = {
+                'anime_title': anime_title,
+                'episode_title': episode_title,
+                'episode_description': episode_description,
+                'episode_aired': episode_aired,
+                'youtube_video_id': youtube_video_id,
+                'episode_number': episode_id,
+            }
+
+            return render(request, 'tela_anime.html', context)
         
-        # Obtendo o vídeo do YouTube, se existir
-        youtube_video_id = None
-        promotion_videos = episode_data.get('videos', {}).get('promotion', [])
-        if promotion_videos and isinstance(promotion_videos, list):
-            youtube_video_id = promotion_videos[0].get('youtube_id', None)
+        else:
+            # Em caso de erro na API, redireciona para página de erro personalizada
+            return render(request, '404.html', {'error_message': 'Dados não encontrados ou erro na API.'})
 
-        # Passando as variáveis para o template
-        context = {
-            'anime_title': anime_title,
-            'episode_title': episode_title,
-            'episode_description': episode_description,
-            'episode_aired': episode_aired,
-            'youtube_video_id': youtube_video_id,
-            'episode_number': episode_id,
-        }
-
-        return render(request, 'tela_anime.html', context)
-
-    # Redireciona para uma página de erro se a API não responder corretamente
-    return render(request, '404.html')
+    except requests.exceptions.RequestException as e:
+        # Lidar com erros de rede ou falhas na requisição
+        return render(request, '404.html', {'error_message': f'Ocorreu um erro ao buscar os dados: {e}'})

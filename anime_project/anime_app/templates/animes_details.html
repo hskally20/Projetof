@@ -26,7 +26,7 @@
             <h5 class="mb-1">Episódio {{ episode.mal_id }}: {{ episode.title|default:"Sem título" }}</h5>
             <p class="mb-1">Lançado em: {{ episode.aired|date:"d/m/Y" }}</p>
           </div>
-          <a href="{% url 'episode_details' anime.mal_id episode.mal_id %}" class="btn btn-outline-success btn-sm">Assistir</a>
+          <a href="{% url 'episode_player' anime.mal_id episode.mal_id %}" class="btn btn-outline-success btn-sm">Assistir</a>
         </div>
         {% empty %}
         <p class="text-center">Não há episódios disponíveis.</p>

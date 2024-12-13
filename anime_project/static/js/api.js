@@ -115,7 +115,7 @@ function renderAnimeDetails(anime, episodes) {
         ? episodes.map(ep => `
           <li class="list-group-item">
             <strong>Ep. ${ep.mal_id}</strong>: ${ep.title || 'Sem título'}
-            <a href="/anime/${anime.mal_id}/episode/${ep.mal_id}" class="btn btn-sm btn-primary float-end">Assistir</a>
+            <a href="{% url 'episode_player' anime_id=anime_id episode_id=episode_id %} class="btn btn-sm btn-danger float-end">Assistir</a>
           </li>`).join('')
         : '<li class="list-group-item">Não há episódios disponíveis.</li>'}
     </ul>`;

@@ -24,6 +24,7 @@ urlpatterns = [
     path('anime_app/' , include ('anime_app.urls')),
     path('', views.index, name='index'),
     path('anime/<int:anime_id>/', views.anime_details, name='anime_details'),
-    path('episode/<int:anime_id>/<int:episode_num>/', views.episode_details, name='episode_details'),
+    path('anime/<int:anime_id>/episode/<int:episode_id>/', views.episode_player, name='episode_player'),
+
 ]
 

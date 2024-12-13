@@ -14,15 +14,18 @@
     <div class="row">
       <div class="col-md-8">
         <div id="video-container" class="video-container mb-3" style="background-color: black; height: 450px;">
-          <!-- O vídeo do episódio vai aqui -->
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ youtube_video_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <!-- Player de vídeo padrão HTML5 -->
+          <video width="100%" height="315" controls>
+            <source src="{{ episode_video_url }}" type="video/mp4">
+            Seu navegador não suporta a tag de vídeo.
+          </video>
         </div>
         
         <!-- Botões de navegação entre episódios -->
         <div class="d-flex justify-content-between mb-3">
-          <button class="btn btn-danger" id="prevEpisode">Episódio Anterior</button>
+          <button class="btn btn-danger" id="prevButton">Episódio Anterior</button>
           <button class="btn btn-danger" id="episodeList">Lista de Episódios</button>
-          <button class="btn btn-danger" id="nextEpisode">Próximo Episódio</button>
+          <button class="btn btn-danger" id="nextButton">Próximo Episódio</button>
         </div>
       </div>
 
@@ -49,6 +52,5 @@
     <button id="showMoreBtn" class="btn btn-danger" onclick="toggleComments()">Mostrar mais</button>
   </div>
 </div>
-
 
 {% endblock %}
