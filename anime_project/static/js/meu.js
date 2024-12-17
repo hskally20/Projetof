@@ -61,40 +61,60 @@ function getCSRFToken() {
     return csrfToken;
 }
 
+// Função para carregar os comentários
+function loadComments(episodeId) {
+    fetch(`/anime_app/load_comments/?episode_id=${episodeId}`)
+        .then(response => response.json())
+        .then(comments => {
+            const commentsContainer = document.getElementById('commentsContainer');
+            commentsContainer.innerHTML = ''; // Limpa os comentários antigos
 
-function addComment(episodeId) {
-    const commentInput = document.getElementById('commentInput').value;
-    const userName = 'Usuário'; // Exemplo de nome de usuário
+            comments.forEach(comment => {
+                const commentElement = document.createElement('div');
+                commentElement.classList.add('comment');
+                commentElement.innerHTML = `
+                    <p><strong>${comment.user_name}</strong>: ${comment.content}</p>
+                    <p><small>${comment.created_at}</small></p>
+                `;
+                commentsContainer.appendChild(commentElement);
+            });
+        })
+        .catch(error => console.error('Erro ao carregar comentários:', error));
+ 
+}
+document.addEventListener('DOMContentLoaded', function() {
+    const episodeId = {{ episode_id }};  // Garanta que o ID do episódio seja passado do Django para o template
+    loadComments(episodeId);
+});
+// Função para adicionar um comentário
+function addComment() {
+    const commentInput = document.getElementById('commentInput');
+    const commentContent = commentInput.value;
 
-    if (commentInput) {
-        const data = {
-            user_name: userName,
-            content: commentInput,
-            episode_id: episodeId
-        };
-
-        fetch('/anime_app/add_comment/', {
+    if(commentContent) {
+        // Lógica para enviar o comentário via AJAX
+        fetch('/add_comment/', {  // Altere a URL conforme necessário
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCSRFToken()  // Adiciona o token CSRF
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
             },
-            body: JSON.stringify(data),
+            body: JSON.stringify({ content: commentContent, episode_id: episodeId })
         })
         .then(response => response.json())
-        .then(responseData => {
-            if (responseData.success) {
-                loadComments(episodeId);  // Atualiza os comentários após adicionar
-            } else {
-                alert(responseData.error);
+        .then(data => {
+            if(data.success) {
+                // Adiciona o comentário à lista
+                const commentList = document.getElementById('commentsList');
+                const newComment = document.createElement('li');
+                newComment.classList.add('list-group-item');
+                newComment.innerHTML = `<p>${data.comment.content}</p><small>${data.comment.created_at}</small>`;
+                commentList.prepend(newComment);
+                commentInput.value = '';  // Limpa o campo de comentário
             }
-        })
-        .catch(error => console.error('Erro ao adicionar comentário:', error));
-    } else {
-        alert('Por favor, digite um comentário!');
+        });
     }
 }
-
 function getCSRFToken() {
     const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     return csrfToken;

@@ -5,26 +5,26 @@ from .models import Comment , Episode
 from django.http import JsonResponse
 import json
 
+
 def load_comments(request):
     episode_id = request.GET.get('episode_id')
-    
+
     # Obtém os comentários do banco de dados para o episódio específico
     comments = Comment.objects.filter(episode_id=episode_id).order_by('-created_at')
-    
+
     # Serializa os dados para enviar ao frontend
     comments_data = [
         {
             'user_name': comment.user_name,
             'content': comment.content,
             'created_at': comment.created_at.strftime('%Y-%m-%d %H:%M:%S'),
-            'id': comment.id,
         }
         for comment in comments
     ]
-    
+
     return JsonResponse(comments_data, safe=False)
 
-@csrf_exempt  # Usado para desabilitar o CSRF apenas durante o teste. Para produção, não use em produção sem um método adequado de CSRF.
+@csrf_exempt  # Usado para desabilitar o CSRF apenas durante o teste. Para produção, use CSRF corretamente.
 def add_comment(request):
     if request.method == 'POST':
         try:
@@ -55,10 +55,9 @@ def add_comment(request):
 
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
-    
+
     # Se não for um método POST
     return JsonResponse({'error': 'Método inválido'}, status=405)
-
 
 def index(request):
     page = request.GET.get('page', 1)
