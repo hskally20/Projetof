@@ -40,14 +40,14 @@
 
     <!-- Seção de Comentários -->
     <div class="comments-section">
-      <input type="text" class="form-control comment-input mb-2" placeholder="Deixe um comentário..." id="commentInput">
+      <input type="text" value="{{ csrf_token }}" class="form-control comment-input mb-2" placeholder="Deixe um comentário..." id="commentInput">
       <button class="btn btn-danger comment-button mb-3" onclick="addComment()">Enviar Comentário</button>
       <div id="commentsListDiv"> </div> <!-- Renomeado para evitar ID duplicado -->
     </div>
     
     <h2>Comentários</h2>
     <ul id="commentsList" class="list-group">
-      <!-- Os comentários serão inseridos aqui -->
+      const episodeId = {{ episode_id }}
     </ul>
     <button id="showMoreBtn" class="btn btn-danger" onclick="toggleComments()">Mostrar mais</button>
   </div>

@@ -1,7 +1,8 @@
 import requests
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from .models import Comment
+from .models import Comment , Episode  
+from django.http import JsonResponse
 import json
 
 def load_comments(request):
@@ -23,34 +24,42 @@ def load_comments(request):
     
     return JsonResponse(comments_data, safe=False)
 
-@csrf_exempt  # Decorador para desabilitar a verificação CSRF (apenas para testes ou use de forma mais segura com o CSRF token no frontend)
+@csrf_exempt  # Usado para desabilitar o CSRF apenas durante o teste. Para produção, não use em produção sem um método adequado de CSRF.
 def add_comment(request):
     if request.method == 'POST':
         try:
-            # Extrair dados do corpo da requisição
-            import json
+            # Recebendo os dados da requisição
             data = json.loads(request.body)
-
             user_name = data.get('user_name')
             content = data.get('content')
             episode_id = data.get('episode_id')
 
+            # Validando os dados
             if not user_name or not content or not episode_id:
-                return JsonResponse({'error': 'Todos os campos são obrigatórios'}, status=400)
-            
-            # Cria um novo comentário no banco de dados
-            new_comment = Comment.objects.create(
-                user_name=user_name,
-                content=content,
-                episode_id=episode_id
-            )
-            return JsonResponse({'success': 'Comentário adicionado com sucesso'}, status=201)
-        
+                return JsonResponse({'error': 'Campos obrigatórios faltando'}, status=400)
+
+            # Obtendo o episódio correspondente
+            try:
+                episode = Episode.objects.get(id=episode_id)
+            except Episode.DoesNotExist:
+                return JsonResponse({'error': 'Episódio não encontrado'}, status=404)
+
+            # Criando e salvando o comentário
+            comment = Comment(user_name=user_name, content=content, episode=episode)
+            comment.save()
+
+            return JsonResponse({'success': True, 'message': 'Comentário adicionado com sucesso!'})
+
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Erro ao decodificar JSON'}, status=400)
+
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=500)
+    
+    # Se não for um método POST
+    return JsonResponse({'error': 'Método inválido'}, status=405)
 
-    return JsonResponse({'error': 'Método não permitido'}, status=405)
-# Função para exibir a página inicial com a lista de animes
+
 def index(request):
     page = request.GET.get('page', 1)
     genre = request.GET.get('genre', '')

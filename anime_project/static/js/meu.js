@@ -40,3 +40,62 @@ async function carregarNovidades() {
 
 window.onload = carregarNovidades;
 
+fetch('/anime_app/add_comment/', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+})
+.then(response => response.json())
+.then(responseData => {
+    if (responseData.success) {
+        loadComments(episodeId);
+    } else {
+        alert(responseData.error);
+    }
+})
+.catch(error => console.error('Erro ao adicionar comentário:', error));
+function getCSRFToken() {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    return csrfToken;
+}
+
+
+function addComment(episodeId) {
+    const commentInput = document.getElementById('commentInput').value;
+    const userName = 'Usuário'; // Exemplo de nome de usuário
+
+    if (commentInput) {
+        const data = {
+            user_name: userName,
+            content: commentInput,
+            episode_id: episodeId
+        };
+
+        fetch('/anime_app/add_comment/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken()  // Adiciona o token CSRF
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(responseData => {
+            if (responseData.success) {
+                loadComments(episodeId);  // Atualiza os comentários após adicionar
+            } else {
+                alert(responseData.error);
+            }
+        })
+        .catch(error => console.error('Erro ao adicionar comentário:', error));
+    } else {
+        alert('Por favor, digite um comentário!');
+    }
+}
+
+function getCSRFToken() {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    return csrfToken;
+}

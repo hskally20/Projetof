@@ -2,8 +2,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-
-
 class Comment(models.Model):
     user_name = models.CharField(max_length=100)  # Nome do usuário que comentou
     content = models.TextField()  # Conteúdo do comentário
@@ -13,3 +11,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.user_name} - {self.content[:30]}'
+
+    class Meta:
+        unique_together = ['user_name', 'episode_id']  # Garante que o usuário só pode comentar uma vez por episódio
+
+class Episode(models.Model):
+    title = models.CharField(max_length=255)
+    video_url = models.URLField()
