@@ -16,20 +16,18 @@
   <div class="form-container">
     <h2>Login</h2>
     <!-- Formulário com método POST e CSRF Token -->
-    <form method="POST" id="loginForm">
+    <form method="post">
       {% csrf_token %}
-      
-      <!-- Renderização do formulário do Django -->
-      <div class="mb-3">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" id="email" required placeholder="Digite seu e-mail">
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Senha</label>
-        <input type="password" name="password" class="form-control" id="password" required placeholder="Digite sua senha">
-      </div>
-      <button type="submit" class="btn btn-danger">Entrar</button>
-    </form>
+      {{ form.non_field_errors }}
+  
+      <label for="username_or_email">Username ou Email:</label>
+      {{ form.username_or_email }}
+      <label for="password">Senha:</label>
+      {{ form.password }}
+  
+      <button type="submit">Login</button>
+  </form>
+  
 
     <div class="form-footer">
       <p>Não tem uma conta? <a href="{% url 'register' %}" class="btn-link">Registre-se</a></p>

@@ -1,9 +1,9 @@
-
 from django.urls import path
-from . import views
+from .views import register, login_view, logout_view, profile_update # Atualize os imports
 
 urlpatterns = [
-    path('login/', views.login_view, name='login'),
-    path('register/', views.register, name='register'),
+    path('register/', register, name='register'),            # URL para registro
+    path('profile/update/', profile_update, name='profile_update'),   # Usando a função register
+    path('login/', login_view, name='login'),      # Função login
+    path('logout/', logout_view, name='logout'),   # Função logout
 ]
-
