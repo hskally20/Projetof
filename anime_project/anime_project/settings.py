@@ -43,6 +43,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -70,7 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'anime_project.wsgi.application'
-
+import dj_database_url
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
@@ -79,8 +81,29 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'default': dj_database_url.parse(os.getenv('DATABASE_URL'))
     }
+    
 }
+# Replace the SQLite DATABASES configuration with PostgreSQL:
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default='postgresql://postgres:postgres@localhost:5432/mysite',
+#         conn_max_age=600
+#     )
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'mysite',  # Nome do banco de dados
+#         'USER': 'postgres',  # Usuário do banco de dados
+#         'PASSWORD': 'h1234',  # Substitua por sua senha
+#         'HOST': 'localhost',  # Host do banco de dados
+#         'PORT': '5432',  # Porta do banco de dados
+#     }
+# }
 
 
 # Password validation
@@ -103,8 +126,6 @@ AUTH_PASSWORD_VALIDATORS = [
 
 AUTH_USER_MODEL = 'users.CustomUser'
  
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -129,8 +150,18 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",  # Caminho para a pasta 'static' no seu diretório base
 ]
 
-
+if not DEBUG:
+    # Tell Django to copy static assets into a path called `staticfiles` (this is specific to Render)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # Enable the WhiteNoise storage backend, which compresses static files to reduce disk use
+    # and renames the files with unique names for each version to support long-term caching
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+import os
+from dotenv import load_dotenv
+
+# Carregar variáveis do arquivo .env
+load_dotenv()
