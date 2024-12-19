@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import CustomAuthenticationForm
 from django.contrib.auth import authenticate
+from django.contrib.auth import logout
 
 
 
@@ -45,6 +46,6 @@ def profile_update(request):
         form = UserProfileForm(instance=request.user)
     return render(request, 'profile_update.html', {'form': form})
 # View de Logout
-def logout_view(request):
-    logout(request)  # Faz logout do usuário
-    return redirect('login')  # Redireciona para a página de login
+def  logout_view(request):
+    logout(request)
+    return redirect('index')  # Redireciona para a página de login

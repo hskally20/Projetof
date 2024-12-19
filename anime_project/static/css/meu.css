@@ -37,6 +37,13 @@
     color: white;
     text-decoration: none;
   }
+  .user-icon-img {
+    width: 40px;      /* Ajusta o tamanho da largura da imagem */
+    height: 40px;     /* Ajusta o tamanho da altura da imagem */
+    border-radius: 100%; /* Faz a imagem ficar redonda */
+    object-fit: cover;  /* Faz a imagem preencher o espaço da área definida sem distorcer */
+}
+
   
   .search-bar {
     display: flex;
@@ -317,7 +324,7 @@ h4 {
 .form-select {
     background-color: #1a1a1a;
     border-color: #333;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .form-select:focus {
@@ -922,11 +929,11 @@ footer {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 /* Texto padrão branco */
-body, h1, h2, h3, h4, h5, h6, p, ul, li, a, span, input, button, .card-text, .card-title, .list-group-item, .anime-card p, .navbar-link, .form-select, .genre-list ul li {
+body, h1, h2, h3, h4, h5, h6, p, ul, li, a, span,   .card-text, .card-title, .list-group-item, .anime-card p, .navbar-link,  .genre-list ul li {
   color: white; /* Define o texto como branco */
 }
 
 /* Mantém os textos vermelhos */
-h2, .navbar-container, .navbar-link:hover, .anime-card h3, .carousel-container  {
+h2, .navbar-container, .navbar-link:hover, .anime-card h3, .carousel-container {
   color: rgb(255, 0, 0); /* Textos que já estavam definidos como vermelhos */
 } 

@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 from anime_app import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -26,5 +28,5 @@ urlpatterns = [
     path('anime/<int:anime_id>/', views.anime_details, name='anime_details'),
     path('anime/<int:anime_id>/episode/<int:episode_id>/', views.episode_player, name='episode_player'),
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

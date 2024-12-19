@@ -23,16 +23,43 @@
       <img src="{% static 'img/teste3.png' %}" alt="Logo Anime Fire" class="logo-img">
     </div>
 
-    <!-- Barra de pesquisa e ícone de usuário -->
-    <div class="d-flex align-items-center">
-      <form action="{% url 'resultados' %}" method="get" class="d-flex">
-        <input type="text" class="form-control" name="query" placeholder="Pesquisar...">
-        <button type="submit" class="btn btn-danger">Pesquisar</button>
-    </form>
-      <a href="{% url 'login' %}" class="user-icon">
+<!-- Barra de pesquisa e ícone de usuário -->
+<div class="d-flex align-items-center">
+  <form action="{% url 'resultados' %}" method="get" class="d-flex">
+    <input type="text" class="form-control" name="query" placeholder="Pesquisar...">
+    <button type="submit" class="btn btn-danger">Pesquisar</button>
+  </form>
+
+  <!-- Menu de usuário -->
+  <div class="dropdown">
+    <button class="btn btn-link dropdown-toggle" type="button" id="userMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+      {% if user.is_authenticated %}
+        {% if user.profile.image %}
+          <img src="{{ user.profile.image.url }}" alt="User Image" class="bootstrap-icons">
+        {% else %}
+          <img src="{% static 'img/default-avatar.jpg' %}" alt="Default Image" class="user-icon-img">
+        {% endif %}
+        
+        <span>{{ user.username }}</span>
+      {% else %}
+        <!-- Exibe o ícone padrão se não estiver logado -->
         <i class="bi bi-person-circle"></i>
-      </a>
-    </div>
+      {% endif %}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="userMenuButton">
+      {% if user.is_authenticated %}
+        <!-- Opções para usuário logado -->
+        <li><a class="dropdown-item" href="{% url 'profile_update' %}">Perfil</a></li>
+        <li><a class="dropdown-item" href="{% url 'logout' %}">Sair</a></li>
+      {% else %}
+        <!-- Opções para usuário não logado -->
+        <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
+        <li><a class="dropdown-item" href="{% url 'register' %}">Registrar</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+
   </header>
 
   <!-- Menu de navegação -->
